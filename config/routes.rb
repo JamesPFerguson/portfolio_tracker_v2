@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :portfolio_stocks
+  resources :users
+  resources :portfolios
+  resources :categories
+  resources :stock_categories
   resources :stocks
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
