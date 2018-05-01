@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501104034) do
+ActiveRecord::Schema.define(version: 20180427225819) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -43,13 +43,16 @@ ActiveRecord::Schema.define(version: 20180501104034) do
 
   create_table "stocks", force: :cascade do |t|
     t.string   "name"
+    t.string   "ticker"
+    t.string   "category"
+    t.string   "sector"
+    t.string   "industry"
     t.float    "price"
     t.float    "pe_ratio"
     t.float    "six_month_appreciation"
     t.float    "market_cap"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.string   "ticker"
   end
 
   create_table "users", force: :cascade do |t|

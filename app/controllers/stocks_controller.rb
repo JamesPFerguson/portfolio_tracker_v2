@@ -1,11 +1,13 @@
 class StocksController < ApplicationController
+  before_action :set_stock, only: [:show, :edit, :update, :destroy]
+  before_action :validate_existence, only: [:show, :edit, :update, :destroy]
 
   def index
     @stocks = user.stocks
   end
 
   def new
-
+    @stock = stock.new
   end
 
   def create
@@ -28,7 +30,11 @@ class StocksController < ApplicationController
 
   end
 
-  def set_category
+  def stock_params
+    params.require(:stock).permit(:ticker)
+  end
+
+  def set_stock
     @stock = Stock.find_by(id: params[:id])
   end
 
