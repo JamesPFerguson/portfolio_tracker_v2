@@ -15,8 +15,6 @@ class Scraper
       i = 0
       td.css(".snapshot-td2").each do |cell|
         cell.text
-        binding.pry
-
         case i
         when 1
           stock.pe_ratio = cell.text
