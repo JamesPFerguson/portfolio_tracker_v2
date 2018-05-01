@@ -3,15 +3,18 @@ class StocksController < ApplicationController
   before_action :validate_existence, only: [:show, :edit, :update, :destroy]
 
   def index
-    @stocks = user.stocks
+    @stocks = Stock.all
   end
 
   def new
-    @stock = stock.new
+    @stock = Stock.new
   end
 
   def create
-
+    ticker = params[:stock][:ticker]
+    scraper = Scraper.new
+    @stock = scraper.scrape_ticker(ticker)
+    redirect_to stocks_path
   end
 
   def show

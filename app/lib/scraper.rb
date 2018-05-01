@@ -7,20 +7,19 @@ class Scraper
 
   def scrape_ticker(ticker)
 
-    stock = Stock.new(ticker: "#{ticker}")
-
-    stock.ticker = ticker
-
+    marketwatch = Nokogiri::HTML(open("https://www.marketwatch.com/investing/stock/#{ticker}"))
     stock_info = Nokogiri::HTML(open("https://finviz.com/quote.ashx?t=#{ticker}"))
+
+    stock = Stock.new(ticker: "#{ticker}")
+    stock.ticker = ticker
+    stock.name = marketwatch.css(".company__name").text
 
     stock_info.css(".snapshot-table2").each do |td|
       i = 0
-      byebug
       td.css(".snapshot-td2").each do |cell|
-        cell.text
         case i
         when 1
-          stock.pe_ratio = cell.text
+          stock.pe_ratio = cell.text.to_f
         when 6
           if cell.text.include?("B")
             stock.market_cap = 1000000000 * market_cap_to_number(cell.text)
@@ -36,6 +35,8 @@ class Scraper
     end #ends the first each statement
 
     stock.save
+
+      return stock
   end #ends the scrape method
 
 
