@@ -26,7 +26,7 @@ class Scraper
           else
             stock.market_cap = 1000000 * market_cap_to_number(cell.text)
           end
-
+        when 23
 
 
         end #ends the case
