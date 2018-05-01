@@ -2,6 +2,9 @@ class CreateStocks < ActiveRecord::Migration
   def change
     create_table :stocks do |t|
       t.string :name
+      t.string :category
+      t.string :sector
+      t.string :industry
       t.float :price
       t.float :pe_ratio
       t.float :six_month_appreciation
