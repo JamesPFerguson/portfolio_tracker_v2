@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :validate_existence, only: [:show, :edit, :update, :destroy]
 
   def new
     @category = Category.new
@@ -29,14 +30,6 @@ class CategoriesController < ApplicationController
     redirect_to category_path(category)
   end
 
-  def delete
-    if set_category
-      category.delete
-      redirect_to categories_path
-    else
-      redirect_to categories_path
-    end
-  end
 
   def category_params
     params.require(:category).permit(:name)
@@ -44,11 +37,18 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.delete
+    redirect_to "index"
   end
 
 
   def set_category
     @category = Category.find_by(id: params[:id])
+  end
+
+  def validate_existence
+    if !@category
+      redirect_to static_missing_path
+    end
   end
 
 end
