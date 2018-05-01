@@ -4,3 +4,7 @@
  <br><br>
  <h3>Category ID:</h3>
  <%= @category.id %>
+
+ <%= form_tag category_path(@category.id), method: "delete" %>
+ <br>
+   <%= submit_tag "Delete #{@category.name}" %>
