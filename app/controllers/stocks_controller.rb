@@ -14,6 +14,7 @@ class StocksController < ApplicationController
     ticker = params[:stock][:ticker]
     scraper = Scraper.new
     @stock = scraper.scrape_ticker(ticker)
+    current_user.stocks << @stock
     redirect_to stocks_path
   end
 

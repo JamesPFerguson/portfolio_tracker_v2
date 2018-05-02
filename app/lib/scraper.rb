@@ -5,17 +5,31 @@ require 'pry'
 class Scraper
 
 
-  def scrape_ticker(ticker)
+  def self.scrape_ticker(ticker)
 
+    #
+    # Categories to be assigned to a stock after scraping
+    #
+    value_id = Category.find_by(name: "Value")
+    momentum_id = Category.find_by(name: "Momentum")
+    neutral_id = Category.find_by(name: "Neutral")
+
+    # Marketwatch is used to obtain the company name via the ticker
+    # stock_info uses finviz to pull specific data about the stock
+    #
     marketwatch = Nokogiri::HTML(open("https://www.marketwatch.com/investing/stock/#{ticker}"))
     stock_info = Nokogiri::HTML(open("https://finviz.com/quote.ashx?t=#{ticker}"))
 
+    # The stock is instantiated and then assigned a ticker and name
     stock = Stock.new(ticker: "#{ticker}")
     stock.ticker = ticker
     stock.name = marketwatch.css(".company__name").text
 
+    # This loop goes through each element in the
+    # finviz table and pulls the relevant info
+    #
     stock_info.css(".snapshot-table2").each do |td|
-      i = 0
+      i = 0 #iterates through each cell in the table
       td.css(".snapshot-td2").each do |cell|
         case i
         when 1
@@ -27,20 +41,37 @@ class Scraper
             stock.market_cap = 1000000 * market_cap_to_number(cell.text)
           end
         when 23
-          stock.six_month_appreciation = cell.text
+          stock.six_month_appreciation = cell.text.to_f
         when 65
-          stock.price = cell.text
+          stock.price = cell.text.to_f
         end #ends the case
+        i += 1 #iterates through the table
       end #ends the second each statement
     end #ends the first each statement
+    byebug
 
     stock.save
+    if stock.pe_ratio < 18 && stock.six_month_appreciation > 15
+      StockCategories.create(stock_id: stock.id, category_id: value_id)
+      StockCategories.create(stock_id: stock.id, category_id: momentum_id)
+    elsif stock.six_month_appreciation > 15
+      StockCategories.create(stock_id: stock.id, category_id: momentum_id)
+    elsif stock.pe_ratio < 18
+      StockCategories.create(stock_id: stock.id, category_id: value_id)
+    else
+      StockCategories.create(stock_id: stock.id, category_id: neutral_id)
+    end
+
+
+
 
       return stock
   end #ends the scrape method
 
 
-  def market_cap_to_number(cap)
+  def self.market_cap_to_number(cap)
     cap.chop.to_f
   end
+
+
 end
