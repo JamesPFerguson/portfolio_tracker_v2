@@ -1,0 +1,13 @@
+<h1> <%= @stock.name %> </h1>
+<h3> <%= @stock.ticker %> </h3>
+
+<label>Price:</label> <%= @stock.price %> <label>Market Cap:</label> <%=@stock.market_cap%>
+<br><br>
+<% if @stock.pe_ratio %>
+<label>P/E Ratio:</label> <%=@stock.pe_ratio%>
+<%end%>
+<label>Six Month Appreciation:</label> <%= @stock.six_month_appreciation %>
+
+<% if stock_owned %>
+<%= link_to "Edit Stock", edit_stock_path(@stock) %>
+<%end%>
