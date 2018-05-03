@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20180427225819) do
   create_table "stocks", force: :cascade do |t|
     t.string   "name"
     t.string   "ticker"
-    t.string   "category"
     t.string   "sector"
     t.string   "industry"
     t.float    "price"

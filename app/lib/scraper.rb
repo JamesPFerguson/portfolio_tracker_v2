@@ -48,23 +48,22 @@ class Scraper
         i += 1 #iterates through the table
       end #ends the second each statement
     end #ends the first each statement
-    byebug
 
     stock.save
     if stock.pe_ratio < 18 && stock.six_month_appreciation > 15
-      StockCategories.create(stock_id: stock.id, category_id: value_id)
-      StockCategories.create(stock_id: stock.id, category_id: momentum_id)
+      StockCategory.create(stock_id: stock.id, category_id: value_id)
+      StockCategory.create(stock_id: stock.id, category_id: momentum_id)
     elsif stock.six_month_appreciation > 15
-      StockCategories.create(stock_id: stock.id, category_id: momentum_id)
+      StockCategory.create(stock_id: stock.id, category_id: momentum_id)
     elsif stock.pe_ratio < 18
-      StockCategories.create(stock_id: stock.id, category_id: value_id)
+      StockCategory.create(stock_id: stock.id, category_id: value_id)
     else
-      StockCategories.create(stock_id: stock.id, category_id: neutral_id)
+      StockCategory.create(stock_id: stock.id, category_id: neutral_id)
     end
 
 
 
-
+      byebug
       return stock
   end #ends the scrape method
 
