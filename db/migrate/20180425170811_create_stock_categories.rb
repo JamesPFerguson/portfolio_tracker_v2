@@ -3,6 +3,7 @@ class CreateStockCategories < ActiveRecord::Migration
     create_table :stock_categories do |t|
       t.integer :stock_id
       t.integer :category_id
+      t.integer :user_id
 
       t.timestamps null: false
     end
