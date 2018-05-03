@@ -11,4 +11,7 @@ class ApplicationController < ActionController::Base
       @user = current_user
     end
 
+    def get_portfolio_id
+      current_user.portfolio.id
+    end
 end

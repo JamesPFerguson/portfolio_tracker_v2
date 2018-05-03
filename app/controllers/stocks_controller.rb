@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
-  before_action :set_stock, only: [:show, :edit, :update, :destroy]
-  before_action :validate_existence, only: [:show, :edit, :update, :destroy]
+  before_action :set_stock, only: [:show, :edit]
+  before_action :validate_existence, only: [:show, :edit]
 
   def index
     @stocks = Stock.all
@@ -12,9 +12,12 @@ class StocksController < ApplicationController
 
   def create
     ticker = params[:stock][:ticker]
-    scraper = Scraper.new
-    @stock = scraper.scrape_ticker(ticker)
-    current_user.stocks << @stock
+    if @stock =  Stock.find_by(ticker: ticker)
+
+    else
+      @stock = Scraper.scrape_ticker(ticker)
+      current_user.stocks << @stock
+    end
     redirect_to stocks_path
   end
 
@@ -27,14 +30,17 @@ class StocksController < ApplicationController
   end
 
   def update
-
+    @stock = Stock.find_by(id: params[:stock][:id])
+    @stock.update
   end
 
   def destroy
-
+    @stock = Stock.find_by(id: params[:stock][:id])
+    @stock.delete
   end
 
   def stock_params
+    #needs to accept nested attribute for quantity
     params.require(:stock).permit(:ticker)
   end
 
