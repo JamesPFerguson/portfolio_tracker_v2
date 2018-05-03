@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :stock_categories
   resources :stocks
   get '/static/missing'
+  resources :sessions
+
+  get 'auth/facebook/callback' => 'session#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
