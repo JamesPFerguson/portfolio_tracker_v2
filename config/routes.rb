@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/static/missing'
   resources :sessions
 
+  root 'static#home', as: 'home'
+
   get 'auth/facebook/callback' => 'session#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
