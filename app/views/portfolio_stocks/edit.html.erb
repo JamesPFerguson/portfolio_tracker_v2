@@ -1,0 +1,8 @@
+<%= @stock.ticker %>
+<%= @stock.try(name) %>
+
+<%= form_for(@portfolio_stock) do |f| %>
+ <%= f.label :quantity %>
+ <%= f.text_field :quantity, @portfolio_stock.quantity %>
+ <%= f.submit %>
+ <%end%>
