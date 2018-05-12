@@ -1,3 +1,11 @@
 <%= link_to('Log in with Facebook', '/auth/facebook') %>
 <br><br>
-<p>Or, create an account:</p>
+<p>Or, <%= link_to "create an account:", new_user_path %> </p>
+
+<%= form_tag('/session', method: :post) do %>
+  <label> username:</label><br>
+  <%= text_field_tag :'user[name]'%>
+  <label> password</label><br>
+  <%= text_field_tag :'user[password]'%>
+  <%= submit_tag "Login" %>
+  <%end%>

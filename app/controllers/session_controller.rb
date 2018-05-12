@@ -6,6 +6,11 @@ class SessionController < ApplicationController
 
    def create
      if @user = User.find_by(name:params[:user][:name])
+       if @user.authenticate(params[:password])
+         session[:user_id] = @user.id
+       else
+         head(:forbidden)
+       end
      elsif auth['uid']
        @user = User.find_or_create_by(uid: auth['uid']) do |u|
          u.name = auth['info']['name']
