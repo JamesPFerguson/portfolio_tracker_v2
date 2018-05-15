@@ -12,13 +12,12 @@ class StocksController < ApplicationController
 
   def create
     ticker = params[:stock][:ticker]
-    if @stock =  Stock.find_by(ticker: ticker)
+    @stock = Scraper.scrape_ticker(ticker)
+    @stock.save
 
-    else
-      @stock = Scraper.scrape_ticker(ticker)
-      current_user.stocks << @stock
-    end
-    redirect_to stocks_path
+    PortfolioStock.create(stock_id: @stock.id, portfolio_id: current_user.portfolio.id)
+
+    redirect_to stock_path(@stock)
   end
 
   def show
