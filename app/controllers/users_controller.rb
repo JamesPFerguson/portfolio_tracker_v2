@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     end
     portfolio = Portfolio.create
     portfolio.user = current_user
+    portfolio.save
     redirect_to portfolio_path(portfolio)
   end
 
