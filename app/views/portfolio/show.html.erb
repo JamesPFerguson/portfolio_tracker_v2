@@ -1,0 +1,9 @@
+<h1> <%= @portfolio.user.name %>'s portfolio </h1>
+
+
+    <p> put percentage breakdown of portfolio here </p>
+
+<% @portfolio.stocks.each do |stock| %>
+  <%= link_to stock.ticker, stock_path(stock) %>
+
+  <% end %>

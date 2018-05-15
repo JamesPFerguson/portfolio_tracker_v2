@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       @user = current_user
     end
 
-    def get_portfolio_id
-      current_user.portfolio.id
+    def get_user_id
+      current_user.id
     end
 end
