@@ -11,8 +11,7 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
-    portfolio = Portfolio.create
-    portfolio.user = @user
+    @user.portfolio = Portfolio.create
     redirect_to portfolio_path(portfolio)
   end
 

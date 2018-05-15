@@ -22,7 +22,8 @@ class StocksController < ApplicationController
   end
 
   def show
-
+    @stock = set_stock
+    @stock_quantity = PortfolioStock.find_by(portfolio_id: current_user.portfolio)
   end
 
   def edit
