@@ -3,9 +3,9 @@
 <p>Or, <%= link_to "create an account:", new_user_path %> </p>
 
 <%= form_tag('/session', method: :post) do %>
-  <label> username:</label><br>
-  <%= text_field_tag :'user[name]'%>
-  <label> password</label><br>
+  <label> Username: </label>
+  <%= text_field_tag :'user[name]'%><br>
+  <label> Password: </label>
   <%= text_field_tag :'user[password]'%>
   <%= submit_tag "Login" %>
   <%end%>
