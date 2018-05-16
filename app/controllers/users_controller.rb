@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  skip_before_action :require_login, only: [:new, :create]
+  before_action :redirect_to_portfolio, only: :new
   def new
     @user = User.new
   end
