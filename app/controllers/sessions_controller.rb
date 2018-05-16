@@ -18,14 +18,16 @@ class SessionsController < ApplicationController
      elsif @user = User.find_by(name: params[:user][:name])
 
        if !@user.authenticate(params[:password])
-         flash[:notice] = "password is incorrect"
+         flash[:notice] = "Password is incorrect"
          render 'new'
+         return
        end
      elsif !@user
          flash[:notice] = "Username not found"
      else
        session[:user_id] = @user.id
        redirect_to portfolio_path(@user.portfolio)
+       return
      end
      render 'new'
    end
@@ -36,7 +38,7 @@ class SessionsController < ApplicationController
 
    def destroy
      session.delete("user_id")
-     redirect_to root_path
+     redirect_to home_path
    end
 
 end

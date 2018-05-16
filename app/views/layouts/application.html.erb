@@ -26,7 +26,7 @@
       top: 0;
       width: 100%;
   }
-  li a:hover {
+  li a:hover .navbar{
       background-color: #111;
   }
   </style>
@@ -37,18 +37,19 @@
 <body>
 
   <% if session[:user_id]  %>
-     <ul>
-       <li><%= link_to "Portfolio", portfolio_path(user_portfolio_id)%> </li>
-       <li><%= link_to "Add a stock", new_stock_path %> </li>
-       <li style="float:right"><%= link_to "Logout", logout_path %> </li>
+     <ul class="navbar">
+       <li class="navbar"><%= link_to "Portfolio", portfolio_path(user_portfolio_id)%> </li>
+       <li class="navbar"><%= link_to "Add a stock", new_stock_path %> </li>
+       <li style="float:right" class="navbar"><%= link_to "Logout", logout_path %> </li>
      </ul>
 
    <%else%>
-     <ul>
-       <li><%= link_to "Home", home_path%></li>
-       <li><%= link_to "Create account", new_user_path%></li>
+     <ul class="navbar">
+       <li class="navbar"><%= link_to "Home", home_path%></li>
+       <li class="navbar"><%= link_to "Create account", new_user_path%></li>
      </ul>
    <%end%>
+   <br>
    <br>
    <br>
 
