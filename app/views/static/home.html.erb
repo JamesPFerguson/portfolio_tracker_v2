@@ -9,10 +9,4 @@
 <br><br>
 <p>Or, <%= link_to "create an account:", new_user_path %> </p>
 
-<%= form_tag('/sessions', method: :post) do %>
-  <label> Username: </label>
-  <%= text_field_tag :'user[name]'%><br>
-  <label> Password: </label>
-  <%= text_field_tag :'user[password]'%>
-  <%= submit_tag "Login" %>
-  <%end%>
+<p> Or,<%= link_to " login normally", new_session_path %> </p>
