@@ -13,31 +13,19 @@ class SessionsController < ApplicationController
          u.email = auth['info']['email']
        end
 
-       session[:user_id] = @user.id
-
      elsif @user = User.find_by(name: params[:user][:name])
 
-       if @user.authenticate(params[:password])
-         session[:user_id] = @user.id
-         redirect_to portfolio_path(@user.portfolio)
-       else
-         if !@user.authenticate(params: [:password])
-           flash[:notice] = "password is incorrect"
-          end
+       if !@user.authenticate(params[:password])
+         flash[:notice] = "password is incorrect"
          render 'new'
        end
-
      elsif !@user
          flash[:notice] = "Username not found"
-         render 'new'
-       end
      else
        session[:user_id] = @user.id
        redirect_to portfolio_path(@user.portfolio)
-     else
-       render 'new'
      end
-
+     render 'new'
    end
 
    def auth

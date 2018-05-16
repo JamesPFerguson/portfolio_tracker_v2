@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :stocks
   get '/static/missing'
   resources :sessions
+  get '/logout' => 'session#destroy'
 
   root 'static#home', as: 'home'
 

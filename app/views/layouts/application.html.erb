@@ -2,11 +2,55 @@
 <html>
 <head>
   <title>PortfolioTracker</title>
+  <style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  li {
+    float: left;
+  }
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    font-weight:bold;
+  }
+  ul {
+      position: fixed;
+      top: 0;
+      width: 100%;
+  }
+  li a:hover {
+      background-color: #111;
+  }
+  </style>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+  <% if session[:user_id]  %>
+     <ul>
+       <li><%=link_to "Portfolio", portfolio_path(user_portfolio_id)</li>
+       <li><a href="/logout">Add a stock</a></li>
+       <li style="float:right"><a href="/logout">Logout</a></li>
+     </ul>
+
+   <%else%>
+     <ul>
+       <li><a href="/login">Login</a></li>
+       <li><a href="/signup">Sign Up</a></li>
+     </ul>
+   <%end%>
+   <br>
+   <br>
 
 <%= yield %>
 
