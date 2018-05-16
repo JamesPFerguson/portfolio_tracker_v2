@@ -1,25 +1,34 @@
-class SessionController < ApplicationController
+class SessionsController < ApplicationController
 
   def new
      @user = User.new
    end
 
    def create
-     if @user = User.find_by(name:params[:user][:name])
+
+     if @user = User.find_by(name: params[:user][:name])
        if @user.authenticate(params[:password])
          session[:user_id] = @user.id
+         redirect_to portfolio_path(@user.portfolio)
        else
-         head(:forbidden)
+         if !@user
+           flash[:message] = "Username not found"
+         elsif !@user.authenticate(params: [:password])
+           flash[:message] = "password is incorrect"
+          end
+         render 'new'
        end
-     elsif auth['uid']
+     elsif auth
        @user = User.find_or_create_by(uid: auth['uid']) do |u|
          u.name = auth['info']['name']
          u.email = auth['info']['email']
+       end
+       session[:user_id] = @user.id
+       redirect_to portfolio_path(@user.portfolio)
      else
        render 'new'
      end
-      session[:user_id] = @user.id
-      redirect_to portfolio_path(@user.portfolio)
+
    end
 
    def auth

@@ -8,13 +8,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      portfolio = Portfolio.create
+      portfolio.user = current_user
+      portfolio.save
+      redirect_to portfolio_path(portfolio)
     else
       render 'new'
     end
-    portfolio = Portfolio.create
-    portfolio.user = current_user
-    portfolio.save
-    redirect_to portfolio_path(portfolio)
   end
 
   def user_params
