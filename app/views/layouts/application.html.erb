@@ -2,56 +2,31 @@
 <html>
 <head>
   <title>PortfolioTracker</title>
-  <style>
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
-  li {
-    float: left;
-  }
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 10px 16px;
-    text-decoration: none;
-    font-weight:bold;
-  }
-  ul {
-      position: fixed;
-      top: 0;
-      width: 100%;
-  }
-  li a:hover .navbar{
-      background-color: #111;
-  }
-  </style>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <% if session[:user_id]  %>
-     <ul class="navbar">
-       <li class="navbar"><%= link_to "Portfolio", portfolio_path(user_portfolio_id)%> </li>
-       <li class="navbar"><%= link_to "Add a stock", new_stock_path %> </li>
-       <li style="float:right" class="navbar"><%= link_to "Logout", logout_path %> </li>
-     </ul>
+<% if session[:user_id]  %>
 
-   <%else%>
-     <ul class="navbar">
-       <li class="navbar"><%= link_to "Home", home_path%></li>
-       <li class="navbar"><%= link_to "Create account", new_user_path%></li>
-     </ul>
-   <%end%>
-   <br>
-   <br>
-   <br>
+<ul>
+
+  <li class="navbar"><%= link_to "Portfolio", portfolio_path(user_portfolio_id)%> </li>
+  <li class="navbar"><%= link_to "Add a stock", new_stock_path %> </li>
+  <li style="float:right" class="navbar"><%= link_to "Logout", logout_path %> </li>
+</ul>
+
+<%else%>
+<ul class="navbar">
+  <li class="navbar"><%= link_to "Home", home_path%></li>
+  <li class="navbar"><%= link_to "Create account", new_user_path%></li>
+</ul>
+<%end%>
+<br>
+<br>
+<br>
 
 <%= yield %>
 
