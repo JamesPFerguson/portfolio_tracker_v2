@@ -3,9 +3,15 @@
 <% end %>
 
 <%= form_tag('/sessions', method: :post) do %>
-  <label> Username: </label>
-  <%= text_field_tag :'user[name]'%><br>
-  <label> Password: </label>
-  <%= text_field_tag :'user[password]'%>
+  <div class="field<%= ' field_with_errors' if @user.errors[:name].any? %>">
+    <%= label_tag "name", "Username" %>
+    <%= text_field_tag :'user[name]'%>
+  </div>
+
+  <div class="field<%= ' field_with_errors' if @user.errors[:password].any? %>">
+    <%= label_tag "password", "Password" %>
+    <%= text_field_tag :'user[password]'%>
+  </div>
+
   <%= submit_tag "Login" %>
   <%end%>
