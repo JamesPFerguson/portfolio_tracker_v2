@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :users
   resources :portfolios
   resources :portfolios, only: [:show] do
-    resources [:portfolio_stocks], only [:show, :new]
+    resources :portfolio_stocks, only: [:show, :new]
   end
   resources :categories
   resources :stock_categories
@@ -15,5 +15,6 @@ Rails.application.routes.draw do
 
   get 'auth/facebook/callback' => 'sessions#create'
 
-  get 'portfolios/:id/stocks/:stock_id' =>
+  post '/portfolios/update' => 'portfolios#update'
+
 end

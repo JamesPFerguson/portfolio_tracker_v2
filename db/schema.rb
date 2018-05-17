@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20180427225819) do
   end
 
   create_table "portfolio_stocks", force: :cascade do |t|
-    t.string "ticker"
     t.integer  "stock_id"
     t.integer  "portfolio_id"
     t.datetime "created_at",   null: false
