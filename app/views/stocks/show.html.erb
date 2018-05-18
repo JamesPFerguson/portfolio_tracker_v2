@@ -7,8 +7,3 @@
 <label>P/E Ratio:</label> <%=@stock.pe_ratio%>
 <%end%>
 <label>Six Month Appreciation:</label> <%= @stock.six_month_appreciation %>
-
-<% if stock_owned %>
-<label> Quantity owned: </label> <%= @stock_quantity %>
-<%= link_to "Edit Stock", edit_stock_path(@stock) %>
-<%end%>

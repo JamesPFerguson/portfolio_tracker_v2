@@ -22,7 +22,6 @@ class StocksController < ApplicationController
 
   def show
     @stock = set_stock
-    @stock_quantity = PortfolioStock.find_by(portfolio_id: current_user.portfolio)
   end
 
   def edit
@@ -31,7 +30,8 @@ class StocksController < ApplicationController
 
   def update
     @stock = Stock.find_by(id: params[:stock][:id])
-    @stock.update
+    Scraper.update_stock(@stock)
+    redirect_to stock_path(@stock)
   end
 
   def destroy

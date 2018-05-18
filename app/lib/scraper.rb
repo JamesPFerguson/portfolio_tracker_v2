@@ -72,5 +72,19 @@ class Scraper
     cap.chop.to_f
   end
 
+  def self.update_stock(stock)
+    @stock = Stock.find_by(ticker: stock.ticker)
+    stock2 = Scraper.scrape_ticker(stock.ticker)
+    stock2.attributes.each do | att, value |
+      @stock.send("#{att}=", value)
+    end
+  end
+
+
+  def self.update_all(stocks)
+    stocks.each do |stock|
+      self.update_stock(stock)
+    end
+  end
 
 end
