@@ -2,7 +2,8 @@ class PortfolioStocksController < ApplicationController
 
   def new
     @portfolio_stock = PortfolioStock.create(portfolio_stock_params)
-
+    @cheapest_stock = Stock.cheapest_stock
+    @momentum_value_stock = Stock.highest_momentum_value_stock
   end
 
   def edit

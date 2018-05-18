@@ -5,3 +5,13 @@
   <%= f.number_field :quantity %>
   <%= f.submit %>
 <%end%>
+
+<h3> Check out these stocks you or other users have added to their portfolio </h3>
+
+<% if @cheapest_stock %>
+<p>Cheapest stock by P/E Ratio: <%= link_to @cheapest_stock.ticker, stock_path(@cheapest_stock) %> </p>
+<%end%>
+<br><br>
+<% if @momentum_value_stock %>
+<p>Highest momentum value stock: <%= link_to @momentum_value_stock.ticker, stock_path(@momentum_value_stock) %> </p>
+<%end%>
