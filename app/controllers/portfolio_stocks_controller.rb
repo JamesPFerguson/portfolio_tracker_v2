@@ -1,9 +1,18 @@
 class PortfolioStocksController < ApplicationController
 
   def new
-    @portfolio_stock = PortfolioStock.create(portfolio_stock_params)
+    @portfolio_stock = PortfolioStock.new
     @cheapest_stock = Stock.cheapest_stock
     @momentum_value_stock = Stock.highest_momentum_value_stock
+  end
+
+  def create
+    @portfolio_stock = PortfolioStock.new(portfolio_stock_params)
+    if @portfolio_stock.save
+      redirect_to portfolio_path(current_user.portfolio)
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -17,4 +26,6 @@ class PortfolioStocksController < ApplicationController
 
   def portfolio_stock_params
     params.require(:portfolio_stock).permit(:quantity, :ticker)
+  end
+
 end

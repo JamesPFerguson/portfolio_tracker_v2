@@ -1,10 +1,12 @@
 <h1> Portfolio </h1>
 
-<%= link_to "Update Portfolio Stock info", controller: "Portfolios", action: "update", id: @portfolio %>
-
     <p> put percentage breakdown of portfolio here </p>
 
 <% @portfolio_stocks.each do |stock| %>
   <%= link_to stock.ticker, stock_path(stock.stock_id) %>
-  <%= link_to "Edit quantity owned", edit_portfolio_portfolio_stock(stock)
+  <%= link_to "Edit quantity owned", edit_portfolio_portfolio_stock(stock) %>
   <% end %>
+
+<%= form_tag portfolio_path(@portfolio), method: "put" do %>
+<%= submit_tag "Update Stocks data" %>
+<% end %>
