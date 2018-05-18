@@ -1,9 +1,9 @@
-<h1> portfolio </h1>
+<h1> Portfolio </h1>
 
 
     <p> put percentage breakdown of portfolio here </p>
 
-<!-- <% @portfolio.stocks.each do |stock| %>
-  <%= link_to stock.ticker, stock_path(stock) %>
-
-  <% end %> -->
+<% @portfolio_stocks.each do |stock| %>
+  <%= link_to stock.ticker, stock_path(stock.stock_id) %>
+  <%= link_to "Edit quantity owned", edit_portfolio_portfolio_stock(stock.stock_id)
+  <% end %>
