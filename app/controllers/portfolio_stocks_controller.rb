@@ -3,7 +3,7 @@ class PortfolioStocksController < ApplicationController
   def new
     @portfolio_stock = PortfolioStock.new
     @cheapest_stock = Stock.cheapest_stock
-    @momentum_value_stock = Stock.highest_momentum_value_stock
+    @highest_mcap_value_stock = Stock.highest_mcap_value_stock
   end
 
   def create

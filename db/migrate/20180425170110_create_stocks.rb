@@ -9,6 +9,7 @@ class CreateStocks < ActiveRecord::Migration
       t.float :pe_ratio
       t.float :six_month_appreciation
       t.float :market_cap
+      t.integer :category_id
 
       t.timestamps null: false
     end

@@ -49,7 +49,7 @@ class Scraper
       end #ends the second each statement
     end #ends the first each statement
 
-    stock.save
+      stock.save
     if stock.pe_ratio < 18 && stock.six_month_appreciation > 15
       StockCategory.create(stock_id: stock.id, category_id: value_id)
       StockCategory.create(stock_id: stock.id, category_id: momentum_id)
@@ -61,9 +61,6 @@ class Scraper
       StockCategory.create(stock_id: stock.id, category_id: neutral_id)
     end
 
-
-
-      byebug
       return stock
   end #ends the scrape method
 
