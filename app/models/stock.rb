@@ -12,7 +12,7 @@ class Stock < ActiveRecord::Base
   #   where("category_id = ?", Category.find_by(name: "Value").id).order("six_month_appreciation desc").first
   # end
 
-  def self.highest_mcap_value
+  def self.highest_mcap_value_stock
     where("pe_ratio > 0").order("market_cap desc").first
   end
 

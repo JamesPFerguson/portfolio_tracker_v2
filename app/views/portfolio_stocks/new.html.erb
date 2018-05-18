@@ -1,4 +1,5 @@
 <%=form_for(@portfolio_stock) do |f| %>
+  <%= f.hidden_field :portfolio_id %>
   <%= f.label :ticker %>
   <%= f.text_field :ticker %>
   <%= f.label :quantity %>
