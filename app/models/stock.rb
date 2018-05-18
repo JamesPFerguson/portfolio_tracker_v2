@@ -5,10 +5,10 @@ class Stock < ActiveRecord::Base
 
   def self.cheapest_stock
     byebug
-    where("pe_ratio > 0").order(pe_ratio :asc).first
+    where("pe_ratio > 0").order("pe_ratio asc").first
   end
 
   def self.highest_momentum_value_stock
-    where("category = value").order(six_month_appreciation :desc).first
+    where("category = value").order("six_month_appreciation desc").first
   end
 end
