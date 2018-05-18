@@ -1,4 +1,5 @@
 <% @stocks.each do |stock| %>
   price: <%= stock.price %>
-  cap: <%= stock.market_cap %>
+  cap: <%= stock.market_cap %><br><br>
+  <%= link_to stock.name, stock_path(stock) %>
   <%end%>
