@@ -6,7 +6,12 @@ class PortfolioStocksController < ApplicationController
   end
 
   def edit
+    @portfolio_stock = PortfolioStock.find_by(id: params[:id])
+  end
 
+  def destroy
+    PortfolioStock.find(params[:id]).destroy
+    redirect_to portfolio_path(current_user.portfolio)
   end
 
   def portfolio_stock_params
