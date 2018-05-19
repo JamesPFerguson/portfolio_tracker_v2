@@ -35,6 +35,7 @@ class Scraper
         when 1
           stock.pe_ratio = cell.text.to_f
         when 6
+          stock.market_cap_string = (cell.text)
           if cell.text.include?("B")
             stock.market_cap = 1000000000 * market_cap_to_number(cell.text)
           else
