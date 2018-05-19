@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20180427225819) do
   create_table "stock_categories", force: :cascade do |t|
     t.integer  "stock_id"
     t.integer  "category_id"
-    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

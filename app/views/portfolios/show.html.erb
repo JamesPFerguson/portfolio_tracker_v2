@@ -4,7 +4,7 @@
 
 <% @portfolio_stocks.each do |stock| %>
   <%= link_to stock.ticker, stock_path(stock.stock_id) %>
-  <%= link_to "Edit quantity owned", edit_portfolio_portfolio_stock(stock) %>
+  <%= link_to "Edit quantity owned", edit_portfolio_portfolio_stock_path(stock) %>
   <% end %>
 
 <%= form_tag portfolio_path(@portfolio), method: "put" do %>

@@ -19,7 +19,7 @@ class PortfolioStocksController < ApplicationController
   end
 
   def edit
-    if @portfolio_stock = PortfolioStock.find_by(id: params[:id])
+    # if @portfolio_stock = PortfolioStock.find_by(id: params[:id])
   end
 
   def update
@@ -47,6 +47,9 @@ class PortfolioStocksController < ApplicationController
   end
 
   def verify_portfolio_stock_existence
-    !!
+    if !@portfolio_stock
+      redirect_to "static#missing"
+    end
   end
+
 end

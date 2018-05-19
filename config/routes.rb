@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :users
   resources :portfolios
   resources :portfolios, only: [:show] do
-    resources :portfolio_stocks, only: [:new, :edit]
+    resources :portfolio_stocks, only: [:new, :edit, :create, :update, :destroy]
   end
   resources :categories
   resources :stock_categories

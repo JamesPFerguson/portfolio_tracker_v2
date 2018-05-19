@@ -1,4 +1,4 @@
-<%=form_for(@portfolio_stock) do |f| %>
+<%=form_for(@portfolio_stock, url: portfolio_portfolio_stocks_path)  do |f| %>
   <%= f.hidden_field :portfolio_id %>
   <%= f.label :ticker %>
   <%= f.text_field :ticker %>
