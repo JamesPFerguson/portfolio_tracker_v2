@@ -1,13 +1,23 @@
 <h1> Portfolio </h1>
 
-    <p> put percentage breakdown of portfolio here </p>
+    <!-- <p> put percentage breakdown of portfolio here </p> -->
 
+<table>
+  <tr>
+    <th> Ticker </th>
+    <th> Quantity Owned </th>
+    <th> Edit </th>
+  </tr>
 <% @portfolio_stocks.each do |stock| %>
-  <%= link_to stock.ticker, stock_path(stock.stock_id) %> <%= stock.quantity %>
-  <%= link_to "Edit quantity owned", edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.stock_id) %>
+<tr>
+  <td> <%= link_to stock.upcased_ticker, stock_path(stock.stock_id) %> </td>
+  <td> <%= stock.quantity %> </td>
+  <td> <%= link_to "Edit quantity", edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.stock_id) %> </td>
+</tr>
   <br><br>
   <% end %>
 
+</table>
 <%= form_tag portfolio_path(@portfolio), method: "put" do %>
 <%= submit_tag "Update Stocks data" %>
 <% end %>

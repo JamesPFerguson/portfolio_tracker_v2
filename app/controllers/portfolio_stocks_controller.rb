@@ -26,7 +26,7 @@ class PortfolioStocksController < ApplicationController
 
   def update
       set_portfolio_stock
-      @portfolio_stock.quantity = portfolio_stock_params
+      @portfolio_stock.quantity = portfolio_stock_params[:quantity].to_i
 
       if @portfolio_stock.save
         redirect_to portfolio_path(params[:portfolio_id])

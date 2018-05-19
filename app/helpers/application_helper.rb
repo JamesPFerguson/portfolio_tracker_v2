@@ -8,4 +8,5 @@ module ApplicationHelper
     current_user.portfolio.id
   end
 
+
 end

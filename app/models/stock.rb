@@ -13,8 +13,11 @@ class Stock < ActiveRecord::Base
   # end
 
   def self.highest_mcap_value_stock
-    where("pe_ratio > 0").order("market_cap desc").first
+    where("pe_ratio > 0").where("pe_ratio < 18").order("market_cap desc").first
   end
 
+  def upcased_ticker
+    self.ticker.upcase
+  end
 
 end
