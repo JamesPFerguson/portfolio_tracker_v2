@@ -9,6 +9,8 @@ class PortfolioStocksController < ApplicationController
   def create
     @portfolio_stock = PortfolioStock.new(portfolio_stock_params)
     stock = Scraper.scrape_ticker(params[:portfolio_stock][:ticker])
+    stock.ticker = stock.ticker.upcase
+    stock.save
     @portfolio_stock.stock_id = stock.id
 
     if @portfolio_stock.save
@@ -19,18 +21,18 @@ class PortfolioStocksController < ApplicationController
   end
 
   def edit
-    # if @portfolio_stock = PortfolioStock.find_by(id: params[:id])
+    @portfolio_stock = PortfolioStock.find_by(id: params[:id])
   end
 
   def update
+      set_portfolio_stock
+      @portfolio_stock.quantity = portfolio_stock_params
 
-    stock = PortfolioStock.new(portfolio_stock_params)
-    if stock.valid?
-      @portfolio_stock = PortfolioStock.find_by(id: params[:id])
-      @portfolio_stock.quantity = stock.quantity
-      redirect_to portfolio_path(params[:portfolio_id])
+      if @portfolio_stock.save
+        redirect_to portfolio_path(params[:portfolio_id])
       return
     else
+      byebug
       render "edit"
     end
 
@@ -40,6 +42,10 @@ class PortfolioStocksController < ApplicationController
   def destroy
     PortfolioStock.find(params[:id]).destroy
     redirect_to portfolio_path(current_user.portfolio)
+  end
+
+  def set_portfolio_stock
+    @portfolio_stock = PortfolioStock.find_by(id: params[:id])
   end
 
   def portfolio_stock_params

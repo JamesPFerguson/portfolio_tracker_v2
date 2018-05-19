@@ -3,8 +3,9 @@
     <p> put percentage breakdown of portfolio here </p>
 
 <% @portfolio_stocks.each do |stock| %>
-  <%= link_to stock.ticker, stock_path(stock.stock_id) %>
-  <%= link_to "Edit quantity owned", edit_portfolio_portfolio_stock_path(stock) %>
+  <%= link_to stock.ticker, stock_path(stock.stock_id) %> <%= stock.quantity %>
+  <%= link_to "Edit quantity owned", edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.stock_id) %>
+  <br><br>
   <% end %>
 
 <%= form_tag portfolio_path(@portfolio), method: "put" do %>
