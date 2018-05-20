@@ -1,28 +1,19 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Portfolio Tracker allows the user to create an account and review their financial portfolio. Any Ticker can be added via the add stock link.
 
-Things you may want to cover:
+To run the program, clone the repository
 
-* Ruby version
+then type "cd portfolio_tracker"
 
-* System dependencies
+then type "bundle install"
 
-* Configuration
+then type "rake db:migrate"
 
-* Database creation
+then type "rake db:seed"
 
-* Database initialization
+then type "rails s"
 
-* How to run the test suite
+and copy the address displayed in the terminal into your web browser.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+If you plan to use portfolio tracker more than once, it is advisable to click the log out link before exiting the program.
