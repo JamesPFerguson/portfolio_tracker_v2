@@ -4,6 +4,8 @@ class Stock < ActiveRecord::Base
   has_many :portfolios, through: :portfolio_stocks
   belongs_to :category
 
+  validates :ticker, uniqueness: true
+
   def self.cheapest_stock
     where("pe_ratio > 0").order("pe_ratio asc").first
   end

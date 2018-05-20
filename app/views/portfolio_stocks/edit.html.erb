@@ -2,7 +2,7 @@
 <%= @portfolio_stock.ticker %>
 </h2>
 
-</h3> Edit quantity of stock owned: </h3>
+<h4> Edit quantity of stock owned: </h4>
 
 <%= form_for(@portfolio_stock,  url: portfolio_portfolio_stock_path) do |f| %>
  <%= f.label :quantity %>
@@ -11,6 +11,6 @@
  <%end%>
 
 <h3> Or, delete the stock from your portfolio </h3>
-  <%= form_tag portfolio_portfolio_stock_path(@portfolio_stock.portfolio_id, @portfolio_stock.stock_id), method: "delete"  do %>
+  <%= form_tag portfolio_portfolio_stock_path(@portfolio_stock.portfolio_id, @portfolio_stock.id), method: "delete"  do %>
   <%= submit_tag "Delete #{@portfolio_stock.ticker}" %>
   <%end%>

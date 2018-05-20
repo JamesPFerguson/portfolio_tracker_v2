@@ -8,9 +8,15 @@ class PortfolioStocksController < ApplicationController
 
   def create
     @portfolio_stock = PortfolioStock.new(portfolio_stock_params)
-    stock = Scraper.scrape_ticker(params[:portfolio_stock][:ticker])
-    stock.ticker = stock.ticker.upcase
-    stock.save
+
+    if stock = Stock.find_by(ticker: params[:portfolio_stock][:ticker])
+      Scraper.update_stock(stock)
+    else
+      stock = Scraper.scrape_ticker(params[:portfolio_stock][:ticker])
+      stock.ticker = stock.ticker.upcase
+      stock.save
+    end
+
     @portfolio_stock.stock_id = stock.id
 
     if @portfolio_stock.save
