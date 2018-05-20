@@ -1,7 +1,5 @@
 <%=form_for(@portfolio_stock, url: portfolio_portfolio_stocks_path)  do |f| %>
   <%= f.hidden_field :portfolio_id %>
-  <%= f.label :ticker %>
-  <%= f.text_field :ticker %>
   <%= f.label :quantity %>
   <%= f.number_field :quantity %>
   <%= f.submit %>
@@ -10,9 +8,9 @@
 <h3> Check out these stocks you or other users have added to their portfolio </h3>
 
 <% if @cheapest_stock %>
-<p>Cheapest stock by P/E Ratio: <%= link_to @cheapest_stock.upcased_ticker, stock_path(@cheapest_stock) %> </p>
+<p>Cheapest stock by P/E Ratio: <%= link_to @cheapest_stock.ticker, stock_path(@cheapest_stock) %> </p>
 <%end%>
 <br><br>
 <% if @highest_mcap_value_stock %>
-<p>Highest market cap value stock: <%= link_to @highest_mcap_value_stock.upcased_ticker, stock_path(@highest_mcap_value_stock) %> </p>
+<p>Highest market cap value stock: <%= link_to @highest_mcap_value_stock.ticker, stock_path(@highest_mcap_value_stock) %> </p>
 <%end%>

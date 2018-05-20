@@ -1,5 +1,7 @@
 class PortfolioStocksController < ApplicationController
 
+  accepts_nested_attributes_for :stock
+
   def new
     @portfolio_stock = PortfolioStock.new(portfolio_id: params[:portfolio_id])
     @cheapest_stock = Stock.cheapest_stock
