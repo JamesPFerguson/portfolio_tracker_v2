@@ -2,6 +2,9 @@
   <%= f.hidden_field :portfolio_id %>
   <%= f.label :quantity %>
   <%= f.number_field :quantity %>
+  <%= f.fields_for :stock, @stock do |s| %>
+    <%= s.text_field :ticker %>
+    <% end %>
   <%= f.submit %>
 <%end%>
 

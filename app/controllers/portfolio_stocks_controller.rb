@@ -2,11 +2,13 @@ class PortfolioStocksController < ApplicationController
 
   def new
     @portfolio_stock = PortfolioStock.new(portfolio_id: params[:portfolio_id])
+    @stock = Stock.new
     @cheapest_stock = Stock.cheapest_stock
     @highest_mcap_value_stock = Stock.highest_mcap_value_stock
   end
 
   def create
+    byebug
     @portfolio_stock = PortfolioStock.new(portfolio_stock_params)
     if stock = Stock.find_by(ticker: params[:portfolio_stock][:ticker].upcase)
       Scraper.update_stock(stock)
@@ -55,7 +57,7 @@ class PortfolioStocksController < ApplicationController
   end
 
   def portfolio_stock_params
-    params.require(:portfolio_stock).permit(:quantity, :ticker, :portfolio_id)
+    params.require(:portfolio_stock).permit(:quantity, :ticker, :portfolio_id, stock_attributes: [:ticker])
   end
 
   def verify_portfolio_stock_existence
