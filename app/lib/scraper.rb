@@ -21,8 +21,7 @@ class Scraper
     stock_info = Nokogiri::HTML(open("https://finviz.com/quote.ashx?t=#{ticker}"))
 
     # The stock is instantiated and then assigned a ticker and name
-    stock = Stock.new(ticker: "#{ticker}")
-    stock.ticker = ticker
+    stock = Stock.new(ticker: ticker.upcase)
     stock.name = marketwatch.css(".company__name").text
 
     # This loop goes through each element in the

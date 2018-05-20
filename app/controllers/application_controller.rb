@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
     end
 
     def get_user_id
-      current_user.id
+        current_user.id
     end
 
     def user_portfolio_id
-      current_user.portfolio.id
+        current_user.portfolio.id
     end
 
     def signed_in?

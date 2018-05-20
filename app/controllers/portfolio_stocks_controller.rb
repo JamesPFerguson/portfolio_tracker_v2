@@ -8,8 +8,7 @@ class PortfolioStocksController < ApplicationController
 
   def create
     @portfolio_stock = PortfolioStock.new(portfolio_stock_params)
-
-    if stock = Stock.find_by(ticker: params[:portfolio_stock][:ticker])
+    if stock = Stock.find_by(ticker: params[:portfolio_stock][:ticker].upcase)
       Scraper.update_stock(stock)
     else
       stock = Scraper.scrape_ticker(params[:portfolio_stock][:ticker])
@@ -27,7 +26,7 @@ class PortfolioStocksController < ApplicationController
   end
 
   def edit
-    @portfolio_stock = PortfolioStock.find_by(id: params[:id])
+    set_portfolio_stock
   end
 
   def update
@@ -52,6 +51,7 @@ class PortfolioStocksController < ApplicationController
 
   def set_portfolio_stock
     @portfolio_stock = PortfolioStock.find_by(id: params[:id])
+    @ticker = @portfolio_stock.stock.ticker
   end
 
   def portfolio_stock_params
