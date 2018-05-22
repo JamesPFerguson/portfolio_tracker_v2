@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   root 'static#home', as: 'home'
 
-  get 'auth/facebook/callback' => 'sessions#create'
+  get 'auth/github/callback' => 'sessions#create'
 
   post '/portfolios/update' => 'portfolios#update'
 
