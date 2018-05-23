@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   root 'static#home', as: 'home'
 
   get 'auth/github/callback' => 'sessions#create'
+  post 'auth/github/callback' => 'sessions#create'
+  get 'auth/github', as: "github_auth"
 
   post '/portfolios/update' => 'portfolios#update'
 

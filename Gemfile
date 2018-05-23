@@ -8,7 +8,7 @@ gem 'sqlite3'
 
 gem 'pry'
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-github'
 gem 'dotenv-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
