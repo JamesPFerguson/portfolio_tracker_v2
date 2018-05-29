@@ -7,13 +7,13 @@ class SessionsController < ApplicationController
    end
 
    def create
-
      if auth
 
        @user = User.find_or_create_by(uid: auth['uid']) do |u|
-         u.name = auth['info']['name']
+         u.name = auth['info']['nickname']
          u.email = auth['info']['email']
        end
+       @user.save(validate: false)
 
      elsif @user = User.find_by(name: params[:user][:name])
 
@@ -25,11 +25,15 @@ class SessionsController < ApplicationController
      elsif !@user
          flash[:notice] = "Username not found"
      else
-       session[:user_id] = @user.id
-       redirect_to portfolio_path(@user.portfolio)
-       return
+        render 'new'
      end
-     render 'new'
+
+     session[:user_id] = @user.id
+     if !@user.portfolio
+       @user.portfolio = Portfolio.new
+     end
+     redirect_to portfolio_path(@user.portfolio)
+
    end
 
    def auth
