@@ -32,13 +32,15 @@ class PortfolioStocksController < ApplicationController
       set_portfolio_stock
       @portfolio_stock.quantity = portfolio_stock_params[:quantity].to_i
 
-      if @portfolio_stock.save
+      if @portfolio_stock.quantity == 0
+        @portfolio_stock.destroy
         redirect_to portfolio_path(params[:portfolio_id])
-      return
-    else
-      byebug
-      render "edit"
-    end
+      elsif @portfolio_stock.save
+        redirect_to portfolio_path(params[:portfolio_id])
+      else
+        byebug
+        render "edit"
+      end
 
   end
 

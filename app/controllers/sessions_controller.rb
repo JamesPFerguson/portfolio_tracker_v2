@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
      elsif @user = User.find_by(name: params[:user][:name])
 
-       if !@user.authenticate(params[:password])
+       if !@user.authenticate(params[:user][:password])
          flash[:notice] = "Password is incorrect"
          render 'new'
          return
