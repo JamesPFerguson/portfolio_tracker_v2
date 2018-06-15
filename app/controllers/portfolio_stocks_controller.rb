@@ -50,6 +50,10 @@ class PortfolioStocksController < ApplicationController
     redirect_to portfolio_path(current_user.portfolio)
   end
 
+  def expensive
+    @expensive_stock = Stock.most_expensive_stock
+  end
+
   def set_portfolio_stock
     @portfolio_stock = PortfolioStock.find_by(id: params[:id])
     @ticker = @portfolio_stock.stock.ticker

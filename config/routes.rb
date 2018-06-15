@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get 'auth/github', as: "github_auth"
 
   post '/portfolios/update' => 'portfolios#update'
+  get '/portfolio_stocks/expensive' => 'portfolio_stocks#expensive'
 
 end

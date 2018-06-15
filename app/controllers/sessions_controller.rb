@@ -22,16 +22,19 @@ class SessionsController < ApplicationController
          render 'new'
          return
        end
-     elsif !@user
-         flash[:notice] = "Username not found"
+
      else
+        flash[:notice] = "Username not found"
         render 'new'
+        return
      end
 
      session[:user_id] = @user.id
+
      if !@user.portfolio
        @user.portfolio = Portfolio.new
      end
+
      redirect_to portfolio_path(@user.portfolio)
 
    end
