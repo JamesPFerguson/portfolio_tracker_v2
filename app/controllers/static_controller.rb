@@ -4,11 +4,9 @@ class StaticController < ApplicationController
   before_action :redirect_to_portfolio, only: :home
 
   def missing
-
   end
 
   def home
-
   end
 
 end

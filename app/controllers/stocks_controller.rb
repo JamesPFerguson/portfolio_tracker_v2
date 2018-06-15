@@ -6,41 +6,40 @@ class StocksController < ApplicationController
     @stocks = Stock.all
   end
 
-  def new
-    @stock = Stock.new
-  end
+  # def new
+  #   @stock = Stock.new
+  # end
 
-  def create
-    ticker = params[:stock][:ticker]
-    @stock = Scraper.scrape_ticker(ticker)
-    @stock.save
-
-    PortfolioStock.create(stock_id: @stock.id, portfolio_id: current_user.portfolio.id)
-
-    redirect_to stock_path(@stock)
-  end
+  # def create
+  #   ticker = params[:stock][:ticker]
+  #   @stock = Scraper.scrape_ticker(ticker)
+  #   @stock.save
+  #
+  #   PortfolioStock.create(stock_id: @stock.id, portfolio_id: current_user.portfolio.id)
+  #
+  #   redirect_to stock_path(@stock)
+  # end
 
   def show
     @stock = set_stock
   end
 
-  def edit
+  # def edit
+  #
+  # end
+  #
+  # def update
+  #   @stock = Stock.find_by(id: params[:stock][:id])
+  #   Scraper.update_stock(@stock)
+  #   redirect_to stock_path(@stock)
+  # end
 
-  end
-
-  def update
-    @stock = Stock.find_by(id: params[:stock][:id])
-    Scraper.update_stock(@stock)
-    redirect_to stock_path(@stock)
-  end
-
-  def destroy
-    @stock = Stock.find_by(id: params[:stock][:id])
-    @stock.delete
-  end
+  # def destroy
+  #   @stock = Stock.find_by(id: params[:stock][:id])
+  #   @stock.delete
+  # end
 
   def stock_params
-    #needs to accept nested attribute for quantity
     params.require(:stock).permit(:ticker)
   end
 
