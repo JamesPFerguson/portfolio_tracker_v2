@@ -51,6 +51,28 @@ class PortfolioStocksController < ApplicationController
     redirect_to portfolio_path(current_user.portfolio)
   end
 
+
+  def show
+    # Map an array of owned stocks, render a show page which allows user to traverse
+    # through the info associated with each stock they own without a page refresh.
+    # @owned tells the view page to load the correct button, since we will be using
+    # the stock view page rather than creating a new one.
+    map_stocks
+    id = stock_ids[0]
+    @stock = Stock.find(id)
+    @owned = true
+  end
+
+  def map_stocks
+    portfolio = current_user.portfolio
+    stocks = portfolio.stocks
+    stock_ids = []
+    portfolio_stocks.each do |stock|
+      stock_ids << stock.id
+    end
+
+  end
+
   def expensive
     @expensive_stock = Stock.most_expensive_stock
   end

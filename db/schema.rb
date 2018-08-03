@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427225819) do
+ActiveRecord::Schema.define(version: 20180803201414) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20180427225819) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "quantity"
+    t.string   "ticker"
   end
 
   create_table "portfolios", force: :cascade do |t|
