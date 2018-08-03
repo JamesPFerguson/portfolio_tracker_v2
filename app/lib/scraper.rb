@@ -1,11 +1,34 @@
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
+require 'net/http'
+require 'json'
 
 class Scraper
 
+  #https://api.iextrading.com/1.0/stock
+
+
+
+
+
+
+
 
   def self.scrape_ticker(ticker)
+    byebug
+
+    url = 'https://api.iextrading.com/1.0/stock' + "/" + ticker
+    stats = '/stats'
+    quote = '/quote'
+
+    uri = URI(url + stats)
+    response = Net::HTTP.get(uri)
+    json_stock = JSON.parse(response)
+
+    uri = URI(url + quote)
+    response = Net::HTTP.get(uri)
+    json_stock_quote = JSON.parse(response)
 
     #
     # Categories to be assigned to a stock after scraping
