@@ -16,6 +16,7 @@ class PortfolioStocksController < ApplicationController
     end
 
     @portfolio_stock.stock_id = stock.id
+    @portfolio_stock.ticker = params_ticker
 
     if @portfolio_stock.save
       redirect_to portfolio_path(current_user.portfolio)
