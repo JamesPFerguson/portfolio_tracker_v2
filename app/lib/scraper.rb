@@ -31,7 +31,7 @@ class Scraper
     stock.price = json_stock_quote["latestPrice"].to_f
     stock.pe_ratio = json_stock_quote["peRatio"].to_f
     stock.market_cap = json_stock_quote["marketCap"].to_f
-    stock.six_month_appreciation = json_stock["month6ChangePercent"].to_f
+    stock.six_month_appreciation = json_stock["month6ChangePercent"].to_f.round(4)*100
     stock.make_cap_string
     stock.save
 

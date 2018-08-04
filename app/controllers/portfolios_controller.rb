@@ -3,7 +3,6 @@ class PortfoliosController < ApplicationController
   def show
     set_portfolio
     @portfolio_stocks = @portfolio.portfolio_stocks
-    byebug
   end
 
   def update

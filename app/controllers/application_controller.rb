@@ -38,8 +38,7 @@ class ApplicationController < ActionController::Base
     end
 
     def redirect_to_portfolio
-
-      if signed_in?
+      if signed_in? && current_user
         redirect_to portfolio_path(user_portfolio_id)
       end
 

@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20180803201414) do
     t.string   "name"
     t.string   "ticker"
     t.string   "sector"
-    t.string   "industry"
     t.string   "market_cap_string"
     t.float    "price"
     t.float    "pe_ratio"

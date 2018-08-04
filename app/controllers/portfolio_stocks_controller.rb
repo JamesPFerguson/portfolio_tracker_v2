@@ -12,11 +12,11 @@ class PortfolioStocksController < ApplicationController
     if stock = Stock.find_by(ticker: params_ticker)
       Scraper.update_stock(stock)
     else
-      stock = Scraper.scrape_ticker(params_ticker)
+    stock = Scraper.scrape_ticker(params_ticker)
     end
 
     @portfolio_stock.stock_id = stock.id
-    @portfolio_stock.ticker = params_ticker
+    @portfolio_stock.ticker = stock.ticker
 
     if @portfolio_stock.save
       redirect_to portfolio_path(current_user.portfolio)
