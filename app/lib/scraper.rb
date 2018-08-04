@@ -16,7 +16,6 @@ class Scraper
 
 
   def self.scrape_ticker(ticker)
-    byebug
 
     url = 'https://api.iextrading.com/1.0/stock' + "/" + ticker
     stats = '/stats'
@@ -45,34 +44,17 @@ class Scraper
 
     # The stock is instantiated and then assigned a ticker and name
     stock = Stock.new(ticker: ticker.upcase)
-    stock.name = marketwatch.css(".company__name").text
+    byebug
+    stock_keys = stock.attributes.keys
+    stock.name = json_stock["companyName"]
+    stock.sector = json_stock_quote["sector"]
+    stock.price = json_stock_quote["latestPrice"].to_f
+    stock.pe_ratio = json_stock_quote["peRatio"].to_f
+    stock.market_cap = json_stock_quote["marketCap"]).to_f
+    stock.six_month_appreciation = json_stock[]"month6ChangePercent"].to_f
 
-    # This loop goes through each element in the
-    # finviz table and pulls the relevant info
-    #
-    stock_info.css(".snapshot-table2").each do |td|
-      i = 0 #iterates through each cell in the table
-      td.css(".snapshot-td2").each do |cell|
-        case i
-        when 1
-          stock.pe_ratio = cell.text.to_f
-        when 6
-          stock.market_cap_string = (cell.text)
-          if cell.text.include?("B")
-            stock.market_cap = 1000000000 * market_cap_to_number(cell.text)
-          else
-            stock.market_cap = 1000000 * market_cap_to_number(cell.text)
-          end
-        when 23
-          stock.six_month_appreciation = cell.text.to_f
-        when 65
-          stock.price = cell.text.to_f
-        end #ends the case
-        i += 1 #iterates through the table
-      end #ends the second each statement
-    end #ends the first each statement
+    stock.save
 
-      stock.save
     if stock.pe_ratio < 18 && stock.six_month_appreciation > 15
       StockCategory.create(stock_id: stock.id, category_id: value_id)
       StockCategory.create(stock_id: stock.id, category_id: momentum_id)
