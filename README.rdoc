@@ -4,7 +4,7 @@ Portfolio Tracker allows the user to create an account and review their financia
 
 To run the program, clone the repository
 
-then type "cd portfolio_tracker"
+then type "cd portfolio_tracker_v2"
 
 then type "bundle install"
 
@@ -15,5 +15,3 @@ then type "rake db:seed"
 then type "rails s"
 
 and copy the address displayed in the terminal into your web browser.
-
-If you plan to use portfolio tracker more than once, it is advisable to click the log out link before exiting the program.
