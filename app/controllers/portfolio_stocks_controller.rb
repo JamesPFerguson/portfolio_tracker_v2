@@ -5,6 +5,7 @@ class PortfolioStocksController < ApplicationController
     @stock = Stock.new
     @cheapest_stock = Stock.cheapest_stock
     @highest_mcap_value_stock = Stock.highest_mcap_value_stock
+    @portfolio_stocks = PortfolioStock.all
   end
 
   def create
