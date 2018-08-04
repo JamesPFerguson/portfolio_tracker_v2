@@ -34,10 +34,10 @@ class Stock < ActiveRecord::Base
 
   	if mcap - billion < 0
   		scap = mcap / million
-  		self.market_cap_string = scap.to_s + "M"
+  		self.market_cap_string = scap.round(2).to_s + "M"
   	else
   		scap = mcap / billion
-  		self.market_cap_string = scap.to_s + "B"
+  		self.market_cap_string = scap.round(2).to_s + "B"
   	end
 
   end

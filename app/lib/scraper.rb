@@ -7,9 +7,9 @@ class Scraper
 
   #https://api.iextrading.com/1.0/stock
 
-  value_id = Category.find_by(name: "Value")
-  momentum_id = Category.find_by(name: "Momentum")
-  neutral_id = Category.find_by(name: "Neutral")
+  @@value_id = Category.find_by(name: "Value")
+  @@momentum_id = Category.find_by(name: "Momentum")
+  @@neutral_id = Category.find_by(name: "Neutral")
 
   def self.scrape_ticker(ticker)
 
@@ -30,20 +30,20 @@ class Scraper
     stock.sector = json_stock_quote["sector"]
     stock.price = json_stock_quote["latestPrice"].to_f
     stock.pe_ratio = json_stock_quote["peRatio"].to_f
-    stock.market_cap = json_stock_quote["marketCap"]).to_f
-    stock.six_month_appreciation = json_stock[]"month6ChangePercent"].to_f
+    stock.market_cap = json_stock_quote["marketCap"].to_f
+    stock.six_month_appreciation = json_stock["month6ChangePercent"].to_f
     stock.make_cap_string
     stock.save
 
     if stock.pe_ratio < 18 && stock.six_month_appreciation > 15
-      StockCategory.create(stock_id: stock.id, category_id: value_id)
-      StockCategory.create(stock_id: stock.id, category_id: momentum_id)
+      create_category_with_id(stock.id, @@value_id)
+      create_category_with_id(stock.id, @@momentum_id)
     elsif stock.six_month_appreciation > 15
-      StockCategory.create(stock_id: stock.id, category_id: momentum_id)
+      create_category_with_id(stock.id, @@momentum_id)
     elsif stock.pe_ratio < 18
-      StockCategory.create(stock_id: stock.id, category_id: value_id)
+      create_category_with_id(stock.id, @@value_id)
     else
-      StockCategory.create(stock_id: stock.id, category_id: neutral_id)
+      create_category_with_id(stock.id, @@neutral_id)
     end
 
       return stock
@@ -62,6 +62,10 @@ class Scraper
     stocks.each do |stock|
       self.update_stock(stock)
     end
+  end
+
+  def self.create_category_with_id(stockId, categoryId)
+    StockCategory.create(stock_id: stockId, category_id: categoryId)
   end
 
 end
