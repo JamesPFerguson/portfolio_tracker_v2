@@ -17,6 +17,12 @@ class PortfolioStocksController < ApplicationController
       stock = Scraper.scrape_ticker(params_ticker)
     end
 
+    # Render the new page if the ticker wasnt found
+    if stock == nil
+      render 'new'
+      return
+    end
+
     @portfolio_stock.stock_id = stock.id
     @portfolio_stock.ticker = stock.ticker
 

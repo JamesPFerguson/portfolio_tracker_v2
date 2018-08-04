@@ -5,6 +5,7 @@ class Stock < ActiveRecord::Base
   belongs_to :category
 
   validates :ticker, uniqueness: true
+  validate :ticker_exists?
 
   def self.cheapest_stock
     where("pe_ratio > 0").order("pe_ratio asc").first
@@ -40,6 +41,12 @@ class Stock < ActiveRecord::Base
   		self.market_cap_string = scap.round(2).to_s + "B"
   	end
 
+  end
+
+  def ticker_exists?
+    if Scraper.scrape_ticker(self.ticker) == nil
+      errors.add(:ticker, "Ticker not found")
+    end
   end
 
 end
