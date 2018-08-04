@@ -49,11 +49,6 @@ class Scraper
       return stock
   end #ends the scrape method
 
-
-  def self.market_cap_to_number(cap)
-    cap.chop.to_f
-  end
-
   def self.update_stock(stock)
     @stock = Stock.find_by(ticker: stock.ticker)
     stock2 = Scraper.scrape_ticker(stock.ticker)
