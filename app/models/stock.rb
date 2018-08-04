@@ -26,4 +26,21 @@ class Stock < ActiveRecord::Base
     self.ticker.upcase
   end
 
+  def make_cap_string
+
+    mcap = self.market_cap
+  	billion = 1000000000
+  	million = 1000000
+
+  	if mcap - billion < 0
+  		scap = mcap / million
+  		stringed_cap = scap.to_s + "M"
+  	else
+  		scap = mcap / billion
+  		scap.to_s
+  		stringed_cap = scap.to_s + "B"
+  	end
+
+  end
+
 end
