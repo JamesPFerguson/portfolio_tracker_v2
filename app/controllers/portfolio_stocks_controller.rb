@@ -10,20 +10,27 @@ class PortfolioStocksController < ApplicationController
 
   def create
     @portfolio_stock = PortfolioStock.new(portfolio_stock_params)
+
     if stock = Stock.find_by(ticker: params_ticker)
       Scraper.update_stock(stock)
     else
-    stock = Scraper.scrape_ticker(params_ticker)
+      stock = Scraper.scrape_ticker(params_ticker)
     end
 
     @portfolio_stock.stock_id = stock.id
     @portfolio_stock.ticker = stock.ticker
 
     if @portfolio_stock.save
-      redirect_to portfolio_path(current_user.portfolio)
+
+      respond_to do |format|
+        format.html { redirect_to portfolio_path(current_user.portfolio) }
+        format.json {render json: @portfolio_stock, status:200}
+      end
+
     else
       render 'new'
     end
+
   end
 
   def edit

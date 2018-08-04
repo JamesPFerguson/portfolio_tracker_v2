@@ -1,19 +1,18 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-
 $(function(){
 
-  $("new_portfolio_stock").on("click", function(e){
-
-    $.ajax({
-      method: "POST"
-      url = 'this.href'
-    }).success(function(response){
-      
-      
-    })
-
+  $(".new_portfolio_stock").on("click", function(e){
     e.preventDefault();
+    alert("clicked")
+    
+    // $.ajax({
+    //   method: "GET"
+    //   url = 'this.href'
+    // }).success(function(response){
+    //   debugger
+    //   
+    // })
+
+    
   }) // ends on click function
   
 }) // ends anon function
