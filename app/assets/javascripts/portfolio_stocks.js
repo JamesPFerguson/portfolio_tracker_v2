@@ -9,8 +9,8 @@ $(function(){
       data: $(this).serialize()
     }).success(function(r){
       let pStock = new PortfolioStock(r.id, r.ticker, r.stock_id, r.portfolio_id, r.quantity)
-      ghtml = pStock.formatPortfolioStock();
-      $(".portfolio-stocks").append(ghtml)
+      stockHtml = pStock.formatPortfolioStock();
+      $(".portfolio-stocks").append(stockHtml)
     })
 
 
