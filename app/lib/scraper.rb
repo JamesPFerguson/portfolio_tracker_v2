@@ -11,7 +11,7 @@ class Scraper
   @@momentum_id = Category.find_by(name: "Momentum")
   @@neutral_id = Category.find_by(name: "Neutral")
 
-  def self.scrape_ticker(ticker)
+  def self.valid_ticker?
     url = 'https://api.iextrading.com/1.0/stock' + "/" + ticker
     stats = '/stats'
     quote = '/quote'
@@ -19,15 +19,25 @@ class Scraper
     uri = URI(url + stats)
     response = Net::HTTP.get(uri)
     if response == "Not Found"
-      return nil
+      return false
+    else
+      return true
     end
+
+  end
+
+  def self.scrape_ticker(ticker)
+
+    url = 'https://api.iextrading.com/1.0/stock' + "/" + ticker
+    stats = '/stats'
+    quote = '/quote'
+
+    uri = URI(url + stats)
+    response = Net::HTTP.get(uri)
     json_stock = JSON.parse(response)
 
     uri = URI(url + quote)
     response = Net::HTTP.get(uri)
-    if response == "Not Found"
-      return nil
-    end
     json_stock_quote = JSON.parse(response)
 
     stock = Stock.new(ticker: ticker.upcase)
@@ -74,3 +84,4 @@ class Scraper
   end
 
 end
+!

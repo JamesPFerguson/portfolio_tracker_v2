@@ -44,7 +44,7 @@ class Stock < ActiveRecord::Base
   end
 
   def ticker_exists?
-    if Scraper.scrape_ticker(self.ticker) == nil
+    if !valid_ticker?
       errors.add(:ticker, "Ticker not found")
     end
   end
