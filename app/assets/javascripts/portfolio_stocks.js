@@ -4,7 +4,9 @@ $(function(){
     e.preventDefault();
     $.ajax({
       method: "POST",
-      url: this.action
+      url: this.action,
+      // dataType: "json",
+      data: $(this).serialize()
     }).success(function(response){
       debugger
 
