@@ -2,14 +2,14 @@ $(function(){
 
   $(".submit-button").on("click", function(e){
     e.preventDefault();
-
-    // $.ajax({
-    //   method: "POST"
-    //   url = 'this.href'
-    // }).success(function(response){
-    //   debugger
-    // 
-    // })
+    debugger
+    $.ajax({
+      method: "POST"
+      url = 'this.action'
+    }).success(function(response){
+      debugger
+    
+    })
 
 
   }) // ends on click function
