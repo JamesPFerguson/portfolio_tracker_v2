@@ -9,7 +9,7 @@ class PortfolioStock < ActiveRecord::Base
 
 
   def ticker_exists?
-    if Scraper.scrape_ticker(self.ticker) == nil
+    if self.ticker == nil || !Scraper.valid_ticker?(self.ticker)
       errors.add(:ticker, "Ticker not found")
     end
   end

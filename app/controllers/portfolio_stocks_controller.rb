@@ -5,7 +5,7 @@ class PortfolioStocksController < ApplicationController
     @stock = Stock.new
     @cheapest_stock = Stock.cheapest_stock
     @highest_mcap_value_stock = Stock.highest_mcap_value_stock
-    @portfolio_stocks = PortfolioStock.all
+    @portfolio_stocks = current_user.portfolio.portfolio_stocks
   end
 
   def create
@@ -15,12 +15,6 @@ class PortfolioStocksController < ApplicationController
       Scraper.update_stock(stock)
     else
       stock = Scraper.scrape_ticker(params_ticker)
-    end
-
-    # Render the new page if the ticker wasnt found
-    if stock == nil
-      render 'new'
-      return
     end
 
     @portfolio_stock.stock_id = stock.id

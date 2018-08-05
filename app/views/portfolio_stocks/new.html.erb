@@ -1,5 +1,14 @@
 <%=form_for(@portfolio_stock, url: portfolio_portfolio_stocks_path)  do |f| %>
   <%= f.hidden_field :portfolio_id %>
+
+  <% if @portfolio_stock.errors.any? %>
+    <ul>
+      <% @portfolio_stock.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
   <%= f.fields_for :stock, @stock do |s| %>
     <%= s.label :ticker %>
     <%= s.text_field :ticker %>
@@ -19,15 +28,16 @@
 <%end%>
 
 
+
+
 <table class="portfolio-stocks">
+
+<% if @portfolio_stocks.length > 0 %>
   <tr>
     <th> Ticker </th>
     <th> Quantity Owned </th>
     <th> Edit </th>
   </tr>
-
-
-<% if @portfolio_stocks %>
 
   <% @portfolio_stocks.each do |stock| %>
     <tr>

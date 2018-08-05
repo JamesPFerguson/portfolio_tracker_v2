@@ -11,7 +11,7 @@ class Scraper
   @@momentum_id = Category.find_by(name: "Momentum")
   @@neutral_id = Category.find_by(name: "Neutral")
 
-  def self.valid_ticker?
+  def self.valid_ticker?(ticker)
     url = 'https://api.iextrading.com/1.0/stock' + "/" + ticker
     stats = '/stats'
     quote = '/quote'
@@ -34,34 +34,43 @@ class Scraper
 
     uri = URI(url + stats)
     response = Net::HTTP.get(uri)
-    json_stock = JSON.parse(response)
-
-    uri = URI(url + quote)
-    response = Net::HTTP.get(uri)
-    json_stock_quote = JSON.parse(response)
-
-    stock = Stock.new(ticker: ticker.upcase)
-    stock.name = json_stock["companyName"]
-    stock.sector = json_stock_quote["sector"]
-    stock.price = json_stock_quote["latestPrice"].to_f
-    stock.pe_ratio = json_stock_quote["peRatio"].to_f
-    stock.market_cap = json_stock_quote["marketCap"].to_f
-    stock.six_month_appreciation = json_stock["month6ChangePercent"].to_f.round(4)*100
-    stock.make_cap_string
-    stock.save
-
-    if stock.pe_ratio < 18 && stock.six_month_appreciation > 15
-      create_category_with_id(stock.id, @@value_id)
-      create_category_with_id(stock.id, @@momentum_id)
-    elsif stock.six_month_appreciation > 15
-      create_category_with_id(stock.id, @@momentum_id)
-    elsif stock.pe_ratio < 18
-      create_category_with_id(stock.id, @@value_id)
+    if response == "Not Found"
+      return stock = Stock.new
     else
-      create_category_with_id(stock.id, @@neutral_id)
-    end
+      json_stock = JSON.parse(response)
 
-      return stock
+      uri = URI(url + quote)
+      response = Net::HTTP.get(uri)
+      json_stock_quote = JSON.parse(response)
+
+      stock = Stock.new(ticker: ticker.upcase)
+      stock.name = json_stock["companyName"]
+      stock.sector = json_stock_quote["sector"]
+      stock.price = json_stock_quote["latestPrice"].to_f
+      stock.pe_ratio = json_stock_quote["peRatio"].to_f
+      stock.market_cap = json_stock_quote["marketCap"].to_f
+      stock.six_month_appreciation = json_stock["month6ChangePercent"].to_f.round(4)*100
+      stock.make_cap_string
+      stock.save
+
+      if stock.id
+
+        if stock.pe_ratio < 18 && stock.six_month_appreciation > 15
+          create_category_with_id(stock.id, @@value_id)
+          create_category_with_id(stock.id, @@momentum_id)
+        elsif stock.six_month_appreciation > 15
+          create_category_with_id(stock.id, @@momentum_id)
+        elsif stock.pe_ratio < 18
+          create_category_with_id(stock.id, @@value_id)
+        else
+          create_category_with_id(stock.id, @@neutral_id)
+        end
+
+      end
+
+        return stock
+      end
+
   end #ends the scrape method
 
   def self.update_stock(stock)
@@ -84,4 +93,3 @@ class Scraper
   end
 
 end
-!

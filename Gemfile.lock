@@ -213,7 +213,6 @@ DEPENDENCIES
   dotenv-rails
   jbuilder (~> 2.0)
   jquery-rails
-  nokogiri
   omniauth
   omniauth-github
   pry
