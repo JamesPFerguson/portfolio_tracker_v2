@@ -21,12 +21,7 @@ class PortfolioStocksController < ApplicationController
 
 
     if @portfolio_stock.save
-
-      respond_to do |format|
-        format.html { redirect_to portfolio_path(current_user.portfolio) }
-        format.json {render json: @portfolio_stock, status:200}
-      end
-
+      render json: @portfolio_stock
     else
       render 'new'
     end
