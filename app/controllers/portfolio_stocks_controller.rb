@@ -9,16 +9,21 @@ class PortfolioStocksController < ApplicationController
   end
 
   def create
+    byebug
     @portfolio_stock = PortfolioStock.new(portfolio_stock_params)
-
+    byebug
     if stock = Stock.find_by(ticker: params_ticker)
+      byebug
       Scraper.update_stock(stock)
     else
+      byebug
       stock = Scraper.scrape_ticker(params_ticker)
     end
 
     @portfolio_stock.stock_id = stock.id
     @portfolio_stock.ticker = stock.ticker
+
+    byebug
 
     if @portfolio_stock.save
 
