@@ -29,7 +29,7 @@ class StocksController < ApplicationController
     @first_id = @stock.id + 1
     respond_to do |format|
       format.html {render 'show'}
-      format.json {render json: params[:id]}
+      format.json {render json: @stock}
     end
   end
 
