@@ -41,11 +41,11 @@ $(function(){
       dataType: "json",
     }).success(function(r){
       let showStock = new ShowStock(r.id, r.name, r.ticker, r.price, r.market_cap_string, r.pe_ratio, r.six_month_appreciation)
-      )
-
+      debugger
     }) // ends success
   }) // ends on click
-}) //ends anon function
+})
+
 
 function ShowStock(id, name, ticker, price, market_cap_string,
    pe_ratio, six_month_appreciation) {
