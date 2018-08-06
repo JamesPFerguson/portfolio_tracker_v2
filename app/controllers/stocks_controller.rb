@@ -4,7 +4,10 @@ class StocksController < ApplicationController
 
   def index
     @stocks = Stock.all
-    render json: @stocks
+    respond_to do |format|
+      format.html {render 'index'}
+      format.json {render json: @stocks}
+    end
   end
 
   # def new
