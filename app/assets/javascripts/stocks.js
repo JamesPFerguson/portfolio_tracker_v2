@@ -41,8 +41,17 @@ $(function(){
       dataType: "json",
       data: $(this).serialize()
     }).success(function(r){
-      let showStock = new ShowStock(r.id, r.name, r.ticker, r.price, r.market_cap_string, r.pe_ratio, r.six_month_appreciation)
-      $("next-stock-id").attr("id", 3)
+      let showStock = new ShowStock(r.id, r.name, r.ticker, r.price,
+         r.market_cap_string, r.pe_ratio, r.six_month_appreciation)
+      $(".stock-name").html(showStock.name)
+      $(".stock-ticker").html(showStock.ticker)
+      $(".stock-price").html(showStock.price)
+      $(".market-cap").html(showStock.market_cap_string)
+      $(".pe-ratio").html(showStock.pe_ratio)
+      $(".six-month").html(showStock.six_month_appreciation)
+
+      nextId = parseInt(r.id) + 1
+      $(".next-stock-id").val(nextId)
     }) // ends success
   }) // ends on click
 })
@@ -51,6 +60,7 @@ $(function(){
 function ShowStock(id, name, ticker, price, market_cap_string,
    pe_ratio, six_month_appreciation) {
   this.id = id
+  this.name = name
   this.ticker = ticker
   this.price = price
   this.market_cap = market_cap_string
