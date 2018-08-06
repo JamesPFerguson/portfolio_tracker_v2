@@ -40,16 +40,24 @@ $(function(){
       url: this.href,
       dataType: "json",
     }).success(function(r){
-
+      let showStock = new ShowStock(r.id, r.name, r.ticker, r.price, r.market_cap_string, r.pe_ratio, r.six_month_appreciation)
+      )
 
     }) // ends success
   }) // ends on click
 }) //ends anon function
 
-function showStock(id, name, ticker, price, market_cap_string, pe_ratio) {
+function ShowStock(id, name, ticker, price, market_cap_string,
+   pe_ratio, six_month_appreciation) {
   this.id = id
   this.ticker = ticker
   this.price = price
   this.market_cap = market_cap_string
   this.pe_ratio = pe_ratio
+  this.six_month = six_month_appreciation
 }
+
+// ShowStock.prototype.formatShowStock = function() {
+//   let showHtml = ''
+//
+// }
