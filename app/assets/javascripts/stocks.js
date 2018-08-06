@@ -1,6 +1,9 @@
-$(function(){
+$(document).ready(function() {
+  attachListeners();
+})
 
-  $(".grab-stocks").on("click", function(e){
+function grabStocks (e) {
+
     e.preventDefault();
     $.ajax({
       method: "GET",
@@ -13,8 +16,7 @@ $(function(){
         $(".all-stocks").append(stockHtml)
       }) //ends forEach
     }) // ends success
-  }) // ends on click
-}) //ends anon function
+  }
 
 function Stock(id, ticker, price) {
   this.id = id
@@ -30,10 +32,13 @@ Stock.prototype.formatStock = function() {
   return stockHtml
 }
 
+function attachListeners() {
+  $(".next-stock-form").on("submit", nextStock)
+  $(".grab-stocks").on("click", grabStocks)
+}
 
-$(function(){
-
-  $(".next-stock-form").on("submit", function(e){
+function nextStock (e) {
+  debugger
     e.preventDefault()
     $.ajax({
       method: "POST",
@@ -53,8 +58,7 @@ $(function(){
       nextId = parseInt(r.id) + 1
       $(".next-stock-id").val(nextId)
     }) // ends success
-  }) // ends on click
-})
+  }
 
 
 function ShowStock(id, name, ticker, price, market_cap_string,

@@ -1,6 +1,13 @@
-$(function(){
+$(document).ready(function() {
+  attachListener();
+})
 
-  $(".new_portfolio_stock").on("submit", function(e){
+function attachListener() {
+  $(".new_portfolio_stock").on("submit", addStock)
+}
+
+function addStock (e) {
+
     e.preventDefault();
     $.ajax({
       method: "POST",
@@ -14,9 +21,7 @@ $(function(){
     })
 
 
-  }) // ends on click function
-
-}) // ends anon function
+  }
 
 function PortfolioStock(id, ticker, stock_id, portfolio_id, quantity) {
   this.id = id
