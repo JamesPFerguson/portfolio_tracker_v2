@@ -3,10 +3,9 @@ $(function(){
   $(".grab-stocks").on("click", function(e){
     e.preventDefault();
     $.ajax({
-      method: "POST",
+      method: "GET",
       url: this.action,
-      dataType: "json",
-      data: this.serialize()
+      dataType: "json"
     }).success(function(r){
       r.forEach(function(j_stock){
         let stock = new Stock(j_stock.id, j_stock.ticker, j_stock.price)
@@ -34,15 +33,16 @@ Stock.prototype.formatStock = function() {
 
 $(function(){
 
-  $(".next-stock").on("click", function(e){
-    e.preventDefault();
+  $(".next-stock-form").on("submit", function(e){
+    e.preventDefault()
     $.ajax({
-      method: "GET",
-      url: this.href,
+      method: "POST",
+      url: this.action,
       dataType: "json",
+      data: $(this).serialize()
     }).success(function(r){
       let showStock = new ShowStock(r.id, r.name, r.ticker, r.price, r.market_cap_string, r.pe_ratio, r.six_month_appreciation)
-      debugger
+      $("next-stock-id").attr("id", 3)
     }) // ends success
   }) // ends on click
 })

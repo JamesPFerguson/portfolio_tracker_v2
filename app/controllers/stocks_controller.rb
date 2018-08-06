@@ -27,11 +27,9 @@ class StocksController < ApplicationController
   def show
     @stock = set_stock
     @first_id = @stock.id + 1
-    end
   end
 
   def next
-    byebug
     @stock = set_stock
     render json: @stock
   end
