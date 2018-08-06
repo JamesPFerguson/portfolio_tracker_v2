@@ -6,5 +6,6 @@ class StockSerializer < ActiveModel::Serializer
     :market_cap_string,
     :price,
     :pe_ratio,
-    :six_month_appreciation
+    :six_month_appreciation,
+    :ticker
 end

@@ -1,6 +1,6 @@
 $(function(){
 
-  $(".submit-button").on("click", function(e){
+  $(".new_portfolio_stock").on("submit", function(e){
     e.preventDefault();
     $.ajax({
       method: "POST",
