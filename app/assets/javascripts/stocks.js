@@ -29,3 +29,27 @@ Stock.prototype.formatStock = function() {
   stockHtml += "</tr>"
   return stockHtml
 }
+
+
+$(function(){
+
+  $(".next-stock").on("click", function(e){
+    e.preventDefault();
+    $.ajax({
+      method: "GET",
+      url: this.href,
+      dataType: "json",
+    }).success(function(r){
+
+
+    }) // ends success
+  }) // ends on click
+}) //ends anon function
+
+function showStock(id, name, ticker, price, market_cap_string, pe_ratio) {
+  this.id = id
+  this.ticker = ticker
+  this.price = price
+  this.market_cap = market_cap_string
+  this.pe_ratio = pe_ratio
+}
