@@ -12,4 +12,8 @@
  <br>
 <strong> Six Month Appreciation: </strong> <label class="six-month"> <%= @stock.six_month_appreciation %> </label>
 
-<button class="next-stock" href="/stocks/<%=@first_id%>" >Get next stock</button>
+<!-- <button class="next-stock" href="/stocks/<%=@first_id%>" >Get next stock</button> -->
+
+<%= form_tag("/stocks/next", method: :post, class: "next-stock-form") do %>
+<%= hidden_field_tag 'id', @first_id %>
+<%= submit_tag %>

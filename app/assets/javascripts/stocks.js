@@ -3,9 +3,10 @@ $(function(){
   $(".grab-stocks").on("click", function(e){
     e.preventDefault();
     $.ajax({
-      method: "GET",
-      url: this.href,
+      method: "POST",
+      url: this.action,
       dataType: "json",
+      data: this.serialize()
     }).success(function(r){
       r.forEach(function(j_stock){
         let stock = new Stock(j_stock.id, j_stock.ticker, j_stock.price)

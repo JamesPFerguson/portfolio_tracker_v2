@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :stock_categories
   resources :stocks
+  post '/stocks/next'
   get '/static/missing'
   resources :sessions
   get '/logout' => 'sessions#destroy'

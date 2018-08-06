@@ -27,10 +27,13 @@ class StocksController < ApplicationController
   def show
     @stock = set_stock
     @first_id = @stock.id + 1
-    respond_to do |format|
-      format.html {render 'show'}
-      format.json {render json: @stock}
     end
+  end
+
+  def next
+    byebug
+    @stock = set_stock
+    render json: @stock
   end
 
   # def edit
