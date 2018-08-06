@@ -11,7 +11,7 @@
     <th> Edit </th>
   </tr>
 <% @portfolio_stocks.each do |stock| %>
-<tr>
+<tr class="stock-<%=stock.id%>-tr">
   <td> <%= link_to stock.ticker, stock_path(stock.stock_id) %> </td>
   <td> <%= stock.quantity %> </td>
   <td> <%= link_to "Edit quantity", edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.id) %> </td>
