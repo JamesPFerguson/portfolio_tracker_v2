@@ -21,7 +21,7 @@ class PortfolioStocksController < ApplicationController
 
 
     if @portfolio_stock.save
-      render json: @portfolio_stock
+      render json: @portfolio_stock, status: 200
     else
       render 'new'
     end
