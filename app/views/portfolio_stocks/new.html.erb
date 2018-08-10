@@ -32,23 +32,23 @@
 
 <table class="portfolio-stocks">
 
-<% if @portfolio_stocks %>
-  <% if @portfolio_stocks.length > 0 %>
+
     <tr>
       <th> Ticker </th>
       <th> Quantity Owned </th>
       <th> Edit </th>
     </tr>
+    <% if @portfolio_stocks %>
+      <% if @portfolio_stocks.length > 0 %>
+        <% @portfolio_stocks.each do |stock| %>
+          <tr>
+            <td> <%= link_to stock.ticker, stock_path(stock.stock_id) %> </td>
+            <td> <%= stock.quantity %> </td>
+            <td> <%= link_to "Edit quantity", edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.id) %> </td>
+          </tr>
+        <% end %>
 
-    <% @portfolio_stocks.each do |stock| %>
-      <tr>
-        <td> <%= link_to stock.ticker, stock_path(stock.stock_id) %> </td>
-        <td> <%= stock.quantity %> </td>
-        <td> <%= link_to "Edit quantity", edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.id) %> </td>
-      </tr>
-    <% end %>
-
-  <%end%>
-<%end%>
+      <%end%>
+    <%end%>
 
 </table>

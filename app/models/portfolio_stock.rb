@@ -4,7 +4,6 @@ class PortfolioStock < ActiveRecord::Base
   accepts_nested_attributes_for :stock
 
   validates :quantity, :numericality => { :greater_than_or_equal_to => 1 }
-  validates :ticker, uniqueness: true
   validate :ticker_exists?
 
 
