@@ -6,7 +6,7 @@ class StocksController < ApplicationController
     @stocks = Stock.all
     respond_to do |format|
       format.html {render 'index'}
-      format.json {render json: @stocks, status: 200}
+      format.json {render json: @stocks}
     end
   end
 
@@ -31,7 +31,7 @@ class StocksController < ApplicationController
 
   def next
     @stock = set_stock
-    render {json: @stock, status: 200}
+    render json: @stock
   end
 
   # def edit
