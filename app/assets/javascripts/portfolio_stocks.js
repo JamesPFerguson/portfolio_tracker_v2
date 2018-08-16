@@ -18,6 +18,8 @@ function addStock (e) {
       let pStock = new PortfolioStock(r.id, r.ticker, r.stock_id, r.portfolio_id, r.quantity)
       stockHtml = pStock.formatPortfolioStock();
       $(".portfolio-stocks").append(stockHtml)
+      $("#ticker").val('')
+      $("#quantity").val('')
     })
 
 
