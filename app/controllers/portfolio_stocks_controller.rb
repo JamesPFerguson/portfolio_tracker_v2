@@ -42,7 +42,6 @@ class PortfolioStocksController < ApplicationController
       elsif @portfolio_stock.save
         redirect_to portfolio_path(params[:portfolio_id])
       else
-        byebug
         render "edit"
       end
 
