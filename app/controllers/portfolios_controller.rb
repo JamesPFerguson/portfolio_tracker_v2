@@ -3,6 +3,10 @@ class PortfoliosController < ApplicationController
   def show
     set_portfolio
     @portfolio_stocks = @portfolio.portfolio_stocks
+    respond_to do |format|
+      format.html {render 'show'}
+      format.json {render json: @portfolio}
+    end
   end
 
   def update
