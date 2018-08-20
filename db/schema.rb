@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180803201414) do
     t.datetime "updated_at",   null: false
     t.integer  "quantity"
     t.string   "ticker"
+    t.float    "price"
   end
 
   create_table "portfolios", force: :cascade do |t|

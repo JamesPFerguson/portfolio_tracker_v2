@@ -18,6 +18,7 @@ class PortfolioStocksController < ApplicationController
 
     @portfolio_stock.stock_id = stock.id
     @portfolio_stock.ticker = stock.ticker
+    @portfolio_stock.price = stock.price
 
 
     if @portfolio_stock.save
