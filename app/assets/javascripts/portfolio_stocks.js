@@ -18,17 +18,20 @@ function addStock (e) {
       let pStock = new PortfolioStock(r.id, r.ticker, r.stock_id, r.portfolio_id, r.quantity)
       stockHtml = pStock.formatPortfolioStock();
       $(".portfolio-stocks").append(stockHtml)
+      $("#ticker").val('')
+      $("#quantity").val('')
     })
 
 
   }
 
-function PortfolioStock(id, ticker, stock_id, portfolio_id, quantity) {
+function PortfolioStock(id, ticker, stock_id, portfolio_id, quantity, price) {
   this.id = id
   this.ticker = ticker
   this.stock_id = stock_id
   this.portfolio_id = portfolio_id
   this.quantity = quantity
+  this.price = price
 }
 
 PortfolioStock.prototype.formatPortfolioStock = function () {
@@ -37,6 +40,9 @@ PortfolioStock.prototype.formatPortfolioStock = function () {
   pStockHtml += `<td><a href="/stocks/${this.stock_id}">${this.ticker}</a> </td>`
   pStockHtml += `<td> ${this.quantity} </td>`
   pStockHtml += `<td><a href="/portfolios/${this.portfolio_id}/portfolio_stocks/${this.id}/edit">Edit quantity</a> </td>`
+  if (this.price) {
+    pStockHtml += `<td> ${this.price} </td>`
+  }
   pStockHtml += "</tr>"
   return pStockHtml;
 }

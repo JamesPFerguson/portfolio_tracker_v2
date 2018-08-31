@@ -18,6 +18,7 @@ class PortfolioStocksController < ApplicationController
 
     @portfolio_stock.stock_id = stock.id
     @portfolio_stock.ticker = stock.ticker
+    @portfolio_stock.price = stock.price
 
 
     if @portfolio_stock.save
@@ -42,7 +43,6 @@ class PortfolioStocksController < ApplicationController
       elsif @portfolio_stock.save
         redirect_to portfolio_path(params[:portfolio_id])
       else
-        byebug
         render "edit"
       end
 

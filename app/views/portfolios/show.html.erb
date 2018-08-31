@@ -4,7 +4,7 @@
 
     <h3> Portfolio Value: <%= number_to_currency(@portfolio.value) %> </h3>
 
-<table>
+<table class="portfolio-stocks-home-table">
   <tr>
     <th> Ticker </th>
     <th> Quantity Owned </th>
@@ -12,7 +12,7 @@
     <th> Price </th>
   </tr>
 <% @portfolio_stocks.each do |stock| %>
-<tr class="stock-<%=stock.id%>-tr">
+<tr class="stock-tr">
   <td> <%= link_to stock.ticker, stock_path(stock.stock_id) %> </td>
   <td> <%= stock.quantity %> </td>
   <td> <%= link_to "Edit quantity", edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.id) %> </td>
@@ -24,3 +24,5 @@
 <%= form_tag portfolio_path(@portfolio, html: {class: "update-stocks-button"}), method: "put" do %>
 <%= submit_tag "Update Stocks data" %>
 <% end %>
+
+<button id="price-sort" href="<%=portfolio_path(params[:id])%>">Click Me </button>

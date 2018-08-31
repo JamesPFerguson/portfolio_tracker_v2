@@ -11,10 +11,10 @@
 
   <%= f.fields_for :stock, @stock do |s| %>
     <%= s.label :ticker %>
-    <%= s.text_field :ticker %>
+    <%= s.text_field :ticker, id: "ticker" %>
   <% end %>
   <%= f.label :quantity %>
-  <%= f.number_field :quantity %>
+  <%= f.number_field :quantity, id: "quantity" %>
   <%= f.submit class: 'submit-button' %>
 <%end%>
 
