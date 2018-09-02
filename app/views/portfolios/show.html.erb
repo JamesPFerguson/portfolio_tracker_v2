@@ -22,7 +22,7 @@
 
 </table>
 <%= form_tag portfolio_path(@portfolio, html: {class: "update-stocks-button"}), method: "put" do %>
-<%= submit_tag "Update Stocks data" %>
+<%= submit_tag "Update Stocks Data" %>
 <% end %>
 
-<button id="price-sort" href="<%=portfolio_path(params[:id])%>">Click Me </button>
+<button id="price-sort" style="margin-left:5em" href="<%=portfolio_path(params[:id])%>">Sort by Price</button>
