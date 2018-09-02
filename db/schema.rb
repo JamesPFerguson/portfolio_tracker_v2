@@ -19,22 +19,13 @@ ActiveRecord::Schema.define(version: 2018_08_03_201414) do
   end
 
   create_table "portfolio_stocks", force: :cascade do |t|
-<<<<<<< HEAD
     t.integer "stock_id"
     t.integer "portfolio_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity"
     t.string "ticker"
-=======
-    t.integer  "stock_id"
-    t.integer  "portfolio_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "quantity"
-    t.string   "ticker"
-    t.float    "price"
->>>>>>> d9376afd6a15d926d83bb4e77f24c30b93f0590a
+    t.float "price"
   end
 
   create_table "portfolios", force: :cascade do |t|
