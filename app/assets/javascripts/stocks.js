@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  attachListeners();
+  $(".next-stock-form").on("submit", nextStock)
+  $(".grab-stocks").on("click", grabStocks)
 })
 
 function grabStocks (e) {
@@ -32,13 +33,7 @@ Stock.prototype.formatStock = function() {
   return stockHtml
 }
 
-function attachListeners() {
-  $(".next-stock-form").on("submit", nextStock)
-  $(".grab-stocks").on("click", grabStocks)
-}
-
 function nextStock (e) {
-  debugger
     e.preventDefault()
     $.ajax({
       method: "POST",

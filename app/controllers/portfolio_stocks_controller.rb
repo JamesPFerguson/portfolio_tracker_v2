@@ -22,7 +22,9 @@ class PortfolioStocksController < ApplicationController
 
 
     if @portfolio_stock.save
-      render json: @portfolio_stock, status: 200
+      render json: @portfolio_stock
+      return
+      byebug
     else
       render 'new'
     end

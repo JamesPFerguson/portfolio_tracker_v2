@@ -5,6 +5,7 @@ class PortfolioStock < ActiveRecord::Base
 
   validates :quantity, :numericality => { :greater_than_or_equal_to => 1 }
   validate :ticker_exists?
+  validates :ticker, uniqueness: true
 
 
   def ticker_exists?
