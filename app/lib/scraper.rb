@@ -43,7 +43,7 @@ class Scraper
       response = Net::HTTP.get(uri)
       json_stock_quote = JSON.parse(response)
 
-      stock = Stock.new(ticker: ticker.upcase)
+      stock = Stock.find_or_initialize_by(ticker: ticker.upcase)
       stock.name = json_stock["companyName"]
       stock.sector = json_stock_quote["sector"]
       stock.price = json_stock_quote["latestPrice"].to_f
@@ -73,23 +73,47 @@ class Scraper
 
   end #ends the scrape method
 
-  def self.update_stock(stock)
-    @stock = Stock.find_by(ticker: stock.ticker)
-    stock2 = Scraper.scrape_ticker(stock.ticker)
-    stock2.attributes.each do | att, value |
-      @stock.send("#{att}=", value)
-    end
-  end
+  # def self.update_stock(stock)
+  #   @stock = Stock.find_by(ticker: stock.ticker)
+  #   stock2 = Scraper.scrape_ticker(stock.ticker)
+  #   stock2.attributes.each do | att, value |
+  #     case att
+  #       when !("id" || "name" || "sector")
+  #          @stock.send("#{att}=", value)
+  #       else
+  #         nil
+  #     end
+  #   end
+  #   @stock.make_cap_string
+  #   @stock.save
+  # end
 
 
   def self.update_all(stocks)
     stocks.each do |stock|
-      self.update_stock(stock)
+      self.scrape_ticker(stock.ticker)
     end
   end
 
   def self.create_category_with_id(stockId, categoryId)
     StockCategory.create(stock_id: stockId, category_id: categoryId)
   end
+
+
+  # def self.get_parsed_stock(stick)
+  #   url = 'https://api.iextrading.com/1.0/stock' + "/" + ticker
+  #   stats = '/stats'
+  #   quote = '/quote'
+
+  #   uri = URI(url + stats)
+  #   response = Net::HTTP.get(uri)
+  #   if response == "Not Found"
+  #     return stock = Stock.new
+  #   else
+  #     json_stock = JSON.parse(response)
+
+  #     uri = URI(url + quote)
+  #     response = Net::HTTP.get(uri)
+  #     json_stock_quote = JSON.parse(response)
 
 end
