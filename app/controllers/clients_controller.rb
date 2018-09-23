@@ -5,11 +5,13 @@ class ClientsController < ApplicationController
     end
 
     def create
-
+        byebug
+        client = Client.new(name: params[:name])
+        render json: client
     end
 
-    def show
-
+    def index
+        
     end
 
     def update
