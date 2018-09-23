@@ -10,7 +10,7 @@ class PortfoliosController < ApplicationController
   end
 
   def update
-    set_portfolio
+    @portfolio = user_portfolio_id
     Scraper.update_all(@portfolio.stocks)
     redirect_to portfolio_path(@portfolio)
   end

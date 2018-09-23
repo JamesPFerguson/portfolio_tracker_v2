@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :users
-  resources :portfolios
   resources :portfolios, only: [:show] do
     resources :portfolio_stocks, only: [:new, :edit, :create, :update, :destroy]
   end
@@ -18,7 +17,7 @@ Rails.application.routes.draw do
   post 'auth/github/callback' => 'sessions#create'
   get 'auth/github', as: "github_auth"
 
-  post '/portfolios/update' => 'portfolios#update'
+  get '/portfolios/update' => 'portfolios#update'
   get '/portfolio_stocks/expensive' => 'portfolio_stocks#expensive'
 
 end
