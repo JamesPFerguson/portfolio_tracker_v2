@@ -29,11 +29,11 @@ function sortPortfolioStocks (e) {
       })
       descending = false;
     }
-    $(".stock-tr").remove()
-    $(".js-portfolio-stock-row").remove()
+    $("#stock-tr").remove()
+    $("#js-portfolio-stock-row").remove()
     port_stocks.forEach(p_stock => {
       let stock_html = p_stock.formatPortfolioStock()
-      $(".portfolio-stocks-home-table").append(stock_html)
+      $("#portfolio-stocks-home-table").append(stock_html)
     })
   })
 }

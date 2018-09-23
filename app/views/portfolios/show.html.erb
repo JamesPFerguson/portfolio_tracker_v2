@@ -1,28 +1,28 @@
+<div class="ml-5">
 <h1> Portfolio </h1>
 
     <!-- <p> put percentage breakdown of portfolio here </p> -->
 
     <h3> Portfolio Value: <%= number_to_currency(@portfolio.value) %> </h3>
 
-<table class="portfolio-stocks-home-table">
+<table id="portfolio-stocks-home-table">
   <tr>
     <th> Ticker </th>
-    <th> Quantity Owned </th>
-    <th> Edit </th>
-    <th> Price </th>
+    <th> Quantity</th>
+    <th id="price-sort" href="<%=portfolio_path(params[:id])%>"> Price </th>
   </tr>
 <% @portfolio_stocks.each do |stock| %>
-<tr class="stock-tr">
+<tr id="stock-tr">
   <td> <%= link_to stock.ticker, stock_path(stock.stock_id) %> </td>
-  <td> <%= stock.quantity %> </td>
-  <td> <%= link_to "Edit quantity", edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.id) %> </td>
-  <td> <%= price_from_portfolio_stock(stock.stock_id) %>
+  <td> <%= link_to stock.quantity, edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.id) %> </td>
+  <td> <%= price_from_portfolio_stock(stock.stock_id) %> </td>
 </tr>
   <% end %>
 
 </table>
 
 
-<button class="update-stocks-button" style="margin-left:5em;" href="<%=portfolios_update_path%>">Update Stock Data</button>
+<button id="update-stocks-button"  href="<%=portfolios_update_path%>">Update Stock Data</button>
 
 <button id="price-sort" style="margin-left:5em;" href="<%=portfolio_path(params[:id])%>">Sort by Price</button>
+</div>
