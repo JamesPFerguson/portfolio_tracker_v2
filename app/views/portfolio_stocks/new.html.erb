@@ -41,7 +41,7 @@
       <% if @portfolio_stocks.length > 0 %>
         <% @portfolio_stocks.each do |stock| %>
           <tr>
-            <td> <%= link_to stock.ticker, stock_path(stock.stock_id) %> </td>
+            <td><%= link_to stock.ticker, stock_path(stock.stock_id),class: "stock-ticker" %></td>
             <td> <%= link_to stock.quantity, edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.id) %> </td>
           </tr>
         <% end %>

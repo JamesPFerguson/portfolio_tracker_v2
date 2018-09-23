@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :clients
   resources :users
   resources :portfolios, only: [:show] do
     resources :portfolio_stocks, only: [:new, :edit, :create, :update, :destroy]
@@ -6,6 +7,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :stock_categories
   resources :stocks
+  resources :clients, only: [:new, :index, :create, :destroy]
   post '/stocks/next'
   get '/static/missing'
   resources :sessions
