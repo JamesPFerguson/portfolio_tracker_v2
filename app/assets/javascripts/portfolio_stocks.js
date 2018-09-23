@@ -38,8 +38,7 @@ PortfolioStock.prototype.formatPortfolioStock = function () {
   let pStockHtml = ''
   pStockHtml += "<tr class='js-portfolio-stock-row'>"
   pStockHtml += `<td><a href="/stocks/${this.stock_id}">${this.ticker}</a> </td>`
-  pStockHtml += `<td> ${this.quantity} </td>`
-  pStockHtml += `<td><a href="/portfolios/${this.portfolio_id}/portfolio_stocks/${this.id}/edit">Edit quantity</a> </td>`
+  pStockHtml += `<td><a href="/portfolios/${this.portfolio_id}/portfolio_stocks/${this.id}/edit"> ${this.quantity} </a></td>`
   if (this.price) {
     pStockHtml += `<td> ${this.price} </td>`
   }

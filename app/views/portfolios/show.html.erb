@@ -1,5 +1,4 @@
 <div class="ml-5">
-<h1> Portfolio </h1>
 
     <!-- <p> put percentage breakdown of portfolio here </p> -->
 
@@ -12,7 +11,7 @@
     <th id="price-sort" href="<%=portfolio_path(params[:id])%>"> Price </th>
   </tr>
 <% @portfolio_stocks.each do |stock| %>
-<tr id="stock-tr">
+<tr class="stock-tr">
   <td> <%= link_to stock.ticker, stock_path(stock.stock_id) %> </td>
   <td> <%= link_to stock.quantity, edit_portfolio_portfolio_stock_path(stock.portfolio_id, stock.id) %> </td>
   <td> <%= price_from_portfolio_stock(stock.stock_id) %> </td>
@@ -24,5 +23,5 @@
 
 <button id="update-stocks-button"  href="<%=portfolios_update_path%>">Update Stock Data</button>
 
-<button id="price-sort" style="margin-left:5em;" href="<%=portfolio_path(params[:id])%>">Sort by Price</button>
+
 </div>
