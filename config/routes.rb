@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :stock_categories
   resources :stocks
-  resources :clients, only: [:new, :index, :create, :destroy]
+  resources :clients, only: [:new, :index, :create, :update, :destroy]
   post '/stocks/next'
   get '/static/missing'
   resources :sessions
